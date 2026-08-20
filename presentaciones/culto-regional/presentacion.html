@@ -130,6 +130,15 @@
   .closing .sig{color:var(--gold-2);font-weight:700;letter-spacing:.04em;margin-top:1.4em}
   .closing .inv{color:var(--muted);font-style:italic;font-family:var(--display);font-size:clamp(15px,1.7vw,19px)}
 
+  /* ---------- checklist ---------- */
+  .checks{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,1.9vw,22px) clamp(22px,3vw,40px)}
+  @media(max-width:820px){.checks{grid-template-columns:1fr}}
+  .chk{display:flex;gap:14px;align-items:flex-start}
+  .tick{flex:0 0 auto;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+    background:rgba(203,168,92,.16);border:1px solid var(--card-line);color:var(--gold);font-weight:700;font-size:15px;margin-top:2px}
+  .chk b{display:block;font-family:var(--display);font-weight:700;font-size:clamp(16px,1.7vw,20px);color:var(--gold-2);line-height:1.15}
+  .chk small{display:block;margin-top:.22em;color:var(--muted);font-size:clamp(12.5px,1.3vw,15px);line-height:1.4}
+
   .tag{color:var(--teal);font-weight:600;font-style:italic}
   .footnote{color:var(--muted);font-size:clamp(12.5px,1.3vw,15px);line-height:1.5;margin-top:1em}
 
@@ -210,6 +219,24 @@
         <div class="card"><h3>Cuidado del patrimonio</h3><p>Acompañamiento para preservar sinagogas, cementerios y archivos históricos de cada comunidad.</p></div>
         <div class="card"><h3>No trabajar en soledad</h3><p>Pertenecer a una red viva, respaldada institucionalmente.</p></div>
       </div>
+    </div>
+  </section>
+
+  <!-- concreto -->
+  <section class="slide">
+    <div class="inner">
+      <p class="eyebrow">En concreto</p>
+      <h2>Qué incluye el acompañamiento<br>a tu comunidad</h2>
+      <hr class="rule">
+      <div class="checks">
+        <div class="chk"><span class="tick">✓</span><div><b>Un shiur semanal</b><small>Clase de Torá y estudio judío, todas las semanas.</small></div></div>
+        <div class="chk"><span class="tick">✓</span><div><b>Un Shabat presencial al mes</b><small>Servicio de Kabalat Shabat en la comunidad, con presencia rabínica.</small></div></div>
+        <div class="chk"><span class="tick">✓</span><div><b>Preparación para el Bar / Bat Mitzvá</b><small>Acompañamiento a los chicos y sus familias en todo el proceso.</small></div></div>
+        <div class="chk"><span class="tick">✓</span><div><b>Casamientos</b><small>Preparación de la pareja y oficio de la ceremonia.</small></div></div>
+        <div class="chk"><span class="tick">✓</span><div><b>Actividad de jóvenes mensual</b><small>Un encuentro por mes para la juventud (opcional, según cada comunidad).</small></div></div>
+        <div class="chk"><span class="tick">✓</span><div><b>Ciclo de vida y festividades</b><small>Acompañamiento en jaguim, duelos y los momentos que la comunidad necesite.</small></div></div>
+      </div>
+      <p class="tag" style="margin-top:1.2em;font-size:clamp(14px,1.5vw,17px)">El alcance final se ajusta a la realidad y las necesidades de cada comunidad.</p>
     </div>
   </section>
 
