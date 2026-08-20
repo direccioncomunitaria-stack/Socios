@@ -14,5 +14,5 @@ la Comunidad Israelita de Santa Fe como nodo coordinador.
 2. El desafío que compartimos
 3. La propuesta
 4. Qué gana tu comunidad
-5. Qué incluye el acompañamiento a tu comunidad (shiur semanal, Shabat presencial, Bar/Bat Mitzvá, casamientos, jóvenes, ciclo de vida)
+5. Qué incluye el acompañamiento a tu comunidad (shiur semanal, Shabat presencial, Bar/Bat Mitzvá, casamientos, ciclo de vida)
 6. Cierre e invitación
