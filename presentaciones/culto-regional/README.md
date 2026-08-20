@@ -1,16 +1,17 @@
 # Modelo Regional de Culto — Presentación para las comunidades del Litoral
 
-Presentación (13 diapositivas) para invitar a las comunidades judías del Litoral
+Presentación para invitar a las comunidades judías del Litoral
 (Paraná, Rafaela, Moisés Ville, Basavilbaso, Ceres, Concepción del Uruguay) a
 sumarse al **Modelo Regional de Rabinato y Desarrollo Cultural del Litoral**, con
 la Comunidad Israelita de Santa Fe como nodo coordinador.
 
 ## Archivos
-- `Modelo_Regional_Culto_Litoral.pptx` — presentación editable (PowerPoint / Google Slides). Incluye notas del orador en cada diapositiva.
-- `generar_presentacion.js` — script que genera el .pptx.
+- `Presentacion_Culto_Regional.pdf` — versión final para compartir/imprimir (5 páginas, 16:9).
+- `presentacion.html` — deck web navegable (flechas, clic o puntos). Fuente del PDF.
 
-## Regenerar el .pptx
-```bash
-npm install pptxgenjs
-node generar_presentacion.js
-```
+## Contenido (5 páginas)
+1. Portada
+2. El desafío que compartimos
+3. La propuesta
+4. Qué gana tu comunidad
+5. Cierre e invitación

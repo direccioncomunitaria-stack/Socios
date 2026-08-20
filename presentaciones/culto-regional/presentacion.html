@@ -1,0 +1,303 @@
+<title>Rabinato Regional del Litoral</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Assistant:wght@300;400;500;600;700&display=swap">
+<style>
+  :root{
+    --navy:#0E2A4E; --navy-2:#0A2140; --navy-3:#071A33;
+    --gold:#CBA85C; --gold-2:#E6D19A; --gold-soft:#8f7a49;
+    --teal:#3E9C9B;
+    --ink:#EAF0F7; --muted:#9DB2CC; --faint:#6C87A6;
+    --paper:#F5F1E7; --paper-ink:#16273D; --paper-muted:#5A6B80; --paper-line:#E0D8C4;
+    --card:rgba(255,255,255,.045); --card-line:rgba(203,168,92,.28);
+    --display:"Frank Ruhl Libre", Georgia, serif;
+    --body:"Assistant", system-ui, -apple-system, Segoe UI, sans-serif;
+    --maxw:1040px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:
+      radial-gradient(1200px 700px at 78% -10%, #14396a 0%, rgba(20,57,106,0) 55%),
+      radial-gradient(1000px 800px at -10% 110%, #0c3a52 0%, rgba(12,58,82,0) 50%),
+      linear-gradient(160deg, var(--navy) 0%, var(--navy-2) 55%, var(--navy-3) 100%);
+    color:var(--ink);
+    font-family:var(--body);
+    -webkit-font-smoothing:antialiased;
+    overflow:hidden;
+  }
+  /* ---------- deck frame ---------- */
+  .deck{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+  .slide{
+    position:absolute;inset:0;
+    display:none;
+    padding:clamp(28px,5vw,72px) clamp(24px,6vw,92px) clamp(76px,9vh,104px);
+    flex-direction:column;justify-content:center;
+    animation:fade .5s ease both;
+    overflow:auto;
+  }
+  .slide.active{display:flex}
+  .slide .inner{width:100%;max-width:var(--maxw);margin:0 auto}
+  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.slide{animation:none}}
+
+  .eyebrow{
+    font-family:var(--body);font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+    font-size:clamp(11px,1.15vw,13px);color:var(--gold);margin:0 0 .5em
+  }
+  h1,h2{font-family:var(--display);font-weight:800;line-height:1.04;margin:0;text-wrap:balance;letter-spacing:-.01em}
+  h1{font-size:clamp(34px,6vw,66px)}
+  h2{font-size:clamp(26px,4.2vw,46px)}
+  .lede{color:var(--muted);font-size:clamp(15px,1.7vw,20px);line-height:1.5;max-width:60ch;font-weight:400}
+  .rule{height:2px;width:74px;background:linear-gradient(90deg,var(--gold),transparent);border:0;margin:1.1em 0}
+  .star{color:var(--gold);font-size:1.1em;line-height:0}
+
+  /* ---------- cards & grids ---------- */
+  .grid{display:grid;gap:clamp(14px,1.8vw,22px)}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:820px){.g2,.g3{grid-template-columns:1fr}}
+  .card{
+    background:var(--card);border:1px solid var(--card-line);border-radius:16px;
+    padding:clamp(16px,2vw,24px);backdrop-filter:blur(2px)
+  }
+  .card h3{font-family:var(--display);font-weight:700;font-size:clamp(17px,1.8vw,21px);margin:0 0 .35em;color:var(--gold-2)}
+  .card p{margin:0;color:var(--muted);font-size:clamp(13px,1.35vw,15.5px);line-height:1.5}
+  .num{
+    display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;
+    width:44px;height:44px;border-radius:50%;background:rgba(203,168,92,.14);
+    border:1px solid var(--card-line);color:var(--gold);font-family:var(--display);font-weight:700;font-size:20px
+  }
+  .row{display:flex;gap:16px;align-items:flex-start}
+  .rows{display:flex;flex-direction:column;gap:clamp(12px,1.7vh,18px)}
+  .rows h3{font-family:var(--display);font-weight:700;font-size:clamp(17px,1.9vw,22px);margin:.05em 0 .12em;color:var(--ink)}
+  .rows p{margin:0;color:var(--muted);font-size:clamp(13px,1.35vw,15.5px);line-height:1.45;max-width:66ch}
+
+  /* ---------- stats ---------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.6vw,20px)}
+  @media(max-width:820px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .stat{text-align:center;background:var(--card);border:1px solid var(--card-line);border-radius:16px;padding:clamp(16px,2.2vw,26px) 10px}
+  .stat b{display:block;font-family:var(--display);font-weight:900;font-size:clamp(34px,4.6vw,52px);color:var(--gold-2);line-height:1;font-variant-numeric:tabular-nums}
+  .stat span{display:block;margin-top:.5em;color:var(--muted);font-size:clamp(12px,1.25vw,14px)}
+
+  /* ---------- table ---------- */
+  .tbl{width:100%;border-collapse:collapse;font-size:clamp(13px,1.45vw,16px)}
+  .tbl th,.tbl td{text-align:left;padding:.72em .9em;border-bottom:1px solid rgba(203,168,92,.18)}
+  .tbl thead th{background:rgba(203,168,92,.12);color:var(--gold-2);font-weight:700;font-family:var(--display)}
+  .tbl tbody tr:nth-child(even){background:rgba(255,255,255,.03)}
+  .tbl td:last-child{color:var(--gold-2);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .tbl td:first-child{font-weight:600;color:var(--ink)}
+  .tblwrap{overflow-x:auto;border:1px solid var(--card-line);border-radius:14px}
+
+  /* ---------- ladder ---------- */
+  .ladder{display:flex;gap:10px;flex-wrap:wrap}
+  .rung{
+    flex:1 1 150px;background:var(--card);border:1px solid var(--card-line);border-radius:14px;
+    padding:16px 12px;text-align:center;position:relative
+  }
+  .rung.final{background:linear-gradient(160deg,rgba(203,168,92,.9),rgba(203,168,92,.7));border-color:transparent}
+  .rung b{display:block;font-family:var(--display);font-weight:700;font-size:clamp(15px,1.6vw,18px);color:var(--gold-2)}
+  .rung.final b{color:var(--navy-3)}
+  .rung small{display:block;margin-top:.3em;color:var(--muted);font-size:12.5px}
+  .rung.final small{color:rgba(7,26,51,.75)}
+
+  /* ---------- sustain columns ---------- */
+  .pillar{border-radius:16px;padding:clamp(18px,2.2vw,26px);display:flex;flex-direction:column;gap:.5em;min-height:210px}
+  .pillar h3{font-family:var(--display);font-weight:800;font-size:clamp(18px,2vw,23px);margin:0}
+  .pillar p{margin:0;font-size:clamp(13px,1.4vw,16px);line-height:1.5}
+  .p-navy{background:rgba(255,255,255,.06);border:1px solid var(--card-line)}
+  .p-navy h3{color:var(--gold-2)}.p-navy p{color:var(--muted)}
+  .p-teal{background:rgba(62,156,155,.16);border:1px solid rgba(62,156,155,.4)}
+  .p-teal h3{color:#bfeae9}.p-teal p{color:#d3ecec}
+  .p-gold{background:linear-gradient(160deg,rgba(203,168,92,.92),rgba(203,168,92,.72));border:1px solid transparent}
+  .p-gold h3{color:var(--navy-3)}.p-gold p{color:rgba(7,26,51,.82)}
+
+  /* ---------- hub diagram ---------- */
+  .hubwrap{display:grid;grid-template-columns:1.15fr .85fr;gap:24px;align-items:center}
+  @media(max-width:900px){.hubwrap{grid-template-columns:1fr}}
+  .hub svg{width:100%;height:auto;display:block}
+
+  /* ---------- title slide ---------- */
+  .title-slide .inner{max-width:900px}
+  .title-badge{display:inline-flex;gap:.6em;align-items:center;color:var(--gold);font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:clamp(11px,1.2vw,13px)}
+  .subtitle{font-family:var(--display);font-style:italic;color:var(--gold-2);font-size:clamp(17px,2.1vw,24px);margin:.2em 0 0}
+  .byline{color:var(--muted);font-size:clamp(14px,1.5vw,17px);line-height:1.5;margin-top:1.1em}
+
+  /* closing */
+  .closing{text-align:center}
+  .closing .inner{max-width:820px;display:flex;flex-direction:column;align-items:center;gap:.2em}
+  .closing h2{font-size:clamp(28px,4.6vw,50px)}
+  .closing .sig{color:var(--gold-2);font-weight:700;letter-spacing:.04em;margin-top:1.4em}
+  .closing .inv{color:var(--muted);font-style:italic;font-family:var(--display);font-size:clamp(15px,1.7vw,19px)}
+
+  .tag{color:var(--teal);font-weight:600;font-style:italic}
+  .footnote{color:var(--muted);font-size:clamp(12.5px,1.3vw,15px);line-height:1.5;margin-top:1em}
+
+  /* ---------- chrome ---------- */
+  .chrome{position:fixed;left:0;right:0;bottom:0;height:64px;display:flex;align-items:center;justify-content:space-between;
+    padding:0 clamp(18px,4vw,40px);z-index:20;
+    background:linear-gradient(0deg, rgba(7,20,38,.9), rgba(7,20,38,0));pointer-events:none}
+  .chrome > *{pointer-events:auto}
+  .dots{display:flex;gap:7px;flex-wrap:wrap;max-width:60%}
+  .dot{width:9px;height:9px;border-radius:50%;border:1px solid var(--gold-soft);background:transparent;cursor:pointer;padding:0;transition:transform .2s}
+  .dot.on{background:var(--gold);border-color:var(--gold);transform:scale(1.18)}
+  .nav{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
+  .nav button{
+    width:38px;height:38px;border-radius:50%;border:1px solid var(--card-line);background:rgba(255,255,255,.05);
+    color:var(--gold-2);font-size:17px;cursor:pointer;display:grid;place-items:center;transition:background .2s,transform .1s}
+  .nav button:hover{background:rgba(203,168,92,.18)}
+  .nav button:active{transform:scale(.92)}
+  .nav button:focus-visible,.dot:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .counter{min-width:52px;text-align:center}
+  .brand{position:fixed;top:clamp(16px,3vh,26px);right:clamp(18px,4vw,40px);z-index:15;color:var(--faint);
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+  .progress{position:fixed;top:0;left:0;height:3px;background:var(--gold);z-index:30;transition:width .35s ease}
+  .hint{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);color:var(--faint);font-size:12px;z-index:15;transition:opacity .5s}
+</style>
+
+<div class="progress" id="prog"></div>
+<div class="brand">CISF · Área de Culto</div>
+
+<div class="deck" id="deck">
+
+  <!-- 1 -->
+  <section class="slide active title-slide">
+    <div class="inner">
+      <h1>Una vida judía regional,<br>sostenida entre todos</h1>
+      <hr class="rule">
+      <p class="subtitle">Modelo Regional de Rabinato y Desarrollo Cultural del Litoral</p>
+      <p class="byline">Una propuesta de la <strong style="color:var(--ink)">Comunidad Israelita de Santa Fe</strong></p>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="slide">
+    <div class="inner">
+      <p class="eyebrow">El punto de partida</p>
+      <h2>Un desafío que compartimos<br>todas las comunidades</h2>
+      <hr class="rule">
+      <div class="rows" style="margin-top:.4em">
+        <div class="row"><span class="num">1</span><div><h3>Escasez de rabinos</h3><p>Cada vez menos rabinos y jazanim para más comunidades. Muchas quedan sin presencia rabínica estable.</p></div></div>
+        <div class="row"><span class="num">2</span><div><h3>Comunidades dispersas</h3><p>Kehilot pequeñas y distantes entre sí, con enorme patrimonio judío y pocos recursos para sostenerlo solas.</p></div></div>
+        <div class="row"><span class="num">3</span><div><h3>Aislamiento</h3><p>El trabajo en soledad debilita: sin agenda común ni red, cada comunidad reinventa todo desde cero.</p></div></div>
+        <div class="row"><span class="num">4</span><div><h3>Relevo generacional</h3><p>Envejecimiento de los socios y jóvenes por convocar. La continuidad judía necesita nuevas manos.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="slide">
+    <div class="inner">
+      <p class="eyebrow">La propuesta</p>
+      <h2 style="font-size:clamp(30px,5.2vw,58px)">Convertir una necesidad<br>en una oportunidad</h2>
+      <hr class="rule">
+      <p class="lede" style="max-width:64ch;font-size:clamp(16px,1.9vw,23px);color:var(--ink)">Que la presencia rabínica y la vida judía no se agoten en una sola ciudad, sino que <strong>irradien a toda la región</strong>: Santa Fe se constituye en el nodo de un modelo regional que llega a cada comunidad del Litoral.</p>
+      <p class="footnote" style="font-style:italic;color:var(--gold-2);max-width:70ch">Santa Fe aporta estructura, coordinación y experiencia · las comunidades aportan su historia, su gente y parte del sostén.</p>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="slide">
+    <div class="inner">
+      <p class="eyebrow">Qué gana tu comunidad</p>
+      <h2>Lo que el modelo regional trae a cada kehilá</h2>
+      <hr class="rule">
+      <div class="grid g3">
+        <div class="card"><h3>Presencia rabínica periódica</h3><p>Oficios al menos una vez por mes y acompañamiento en las festividades, sin depender de contar con rabino propio.</p></div>
+        <div class="card"><h3>Ceremonias y ciclo de vida</h3><p>Acompañamiento rabínico en simjot, duelos, Bnei Mitzvá y momentos de necesidad de las familias.</p></div>
+        <div class="card"><h3>Agenda cultural compartida</h3><p>Charlas, ciclos de cine, música y jazanut que circulan entre las comunidades de la región.</p></div>
+        <div class="card"><h3>Formación de jóvenes</h3><p>Extender a la región la formación de líderes y vocaciones, conectando a los jóvenes en una red común.</p></div>
+        <div class="card"><h3>Cuidado del patrimonio</h3><p>Acompañamiento para preservar sinagogas, cementerios y archivos históricos de cada comunidad.</p></div>
+        <div class="card"><h3>No trabajar en soledad</h3><p>Pertenecer a una red viva, respaldada institucionalmente.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 -->
+  <section class="slide closing">
+    <div class="inner">
+      <div class="star" style="font-size:30px;margin-bottom:.3em">✡</div>
+      <h2>Hagamos del Litoral la capital<br>de una vida judía regional viva</h2>
+      <p class="lede" style="text-align:center;max-width:60ch;margin-top:1em">Sostenida entre todos, con proyección cultural y en sintonía con el Movimiento Masortí. Es, en definitiva, una apuesta por el futuro judío del Litoral.</p>
+      <hr class="rule" style="margin:1.3em auto;background:linear-gradient(90deg,transparent,var(--gold),transparent);width:120px">
+      <p class="sig">Comunidad Israelita de Santa Fe · Área de Culto</p>
+      <p class="inv">Los invitamos a construir esta red juntos.</p>
+    </div>
+  </section>
+
+</div>
+
+<div class="hint" id="hint">← / → para navegar</div>
+
+<div class="chrome">
+  <div class="dots" id="dots"></div>
+  <div class="nav">
+    <button id="prev" aria-label="Anterior">‹</button>
+    <span class="counter" id="counter">1 / 13</span>
+    <button id="next" aria-label="Siguiente">›</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const dotsWrap=document.getElementById('dots');
+  const counter=document.getElementById('counter');
+  const prog=document.getElementById('prog');
+  const hint=document.getElementById('hint');
+  let i=0;
+  slides.forEach((_,n)=>{
+    const b=document.createElement('button');
+    b.className='dot'+(n===0?' on':'');b.setAttribute('aria-label','Ir a la diapositiva '+(n+1));
+    b.onclick=()=>go(n);dotsWrap.appendChild(b);
+  });
+  const dots=[...dotsWrap.children];
+  function go(n){
+    n=Math.max(0,Math.min(slides.length-1,n));
+    slides[i].classList.remove('active');dots[i].classList.remove('on');
+    i=n;
+    slides[i].classList.add('active');dots[i].classList.add('on');
+    slides[i].scrollTop=0;
+    counter.textContent=(i+1)+' / '+slides.length;
+    prog.style.width=((i)/(slides.length-1)*100)+'%';
+    if(i>0&&hint){hint.style.opacity='0';}
+  }
+  document.getElementById('next').onclick=()=>go(i+1);
+  document.getElementById('prev').onclick=()=>go(i-1);
+  window.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();go(i+1);}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(i-1);}
+    else if(e.key==='Home'){go(0);}else if(e.key==='End'){go(slides.length-1);}
+  });
+  // click zones (ignore interactive elements)
+  document.getElementById('deck').addEventListener('click',e=>{
+    if(e.target.closest('button, a, .tblwrap')) return;
+    const x=e.clientX/window.innerWidth;
+    if(x>0.62) go(i+1); else if(x<0.38) go(i-1);
+  });
+  // swipe
+  let sx=null;
+  addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
+  addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>45)go(i+(dx<0?1:-1));sx=null;},{passive:true});
+  prog.style.width='0%';
+
+  // ---- hub-and-spoke diagram ----
+  const names=['Paraná','Rafaela','Moisés Ville','Basavilbaso','Ceres','C. del Uruguay'];
+  const W=520,H=430,cx=150,cy=215;
+  const spokes=names.map((n,k)=>{const y=45+k*68;return{x:395,y,n};});
+  let g='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Diagrama: Santa Fe como nodo conectado a seis comunidades">';
+  spokes.forEach(s=>{g+='<line x1="'+(cx+58)+'" y1="'+cy+'" x2="'+(s.x-6)+'" y2="'+s.y+'" stroke="#CBA85C" stroke-width="1.6" stroke-dasharray="4 5" opacity="0.75"/>';});
+  // hub
+  g+='<circle cx="'+cx+'" cy="'+cy+'" r="62" fill="#123a70" stroke="#CBA85C" stroke-width="2"/>';
+  g+='<text x="'+cx+'" y="'+(cy-6)+'" text-anchor="middle" fill="#E6D19A" font-family="Frank Ruhl Libre, serif" font-weight="700" font-size="19">SANTA FE</text>';
+  g+='<text x="'+cx+'" y="'+(cy+16)+'" text-anchor="middle" fill="#9DB2CC" font-family="Assistant, sans-serif" font-size="12.5">Nodo regional</text>';
+  // spokes
+  spokes.forEach(s=>{
+    g+='<rect x="'+s.x+'" y="'+(s.y-17)+'" rx="14" width="120" height="34" fill="rgba(62,156,155,0.16)" stroke="#3E9C9B" stroke-width="1.2"/>';
+    g+='<circle cx="'+(s.x+16)+'" cy="'+s.y+'" r="4.5" fill="#3E9C9B"/>';
+    g+='<text x="'+(s.x+30)+'" y="'+(s.y+4.5)+'" fill="#EAF0F7" font-family="Assistant, sans-serif" font-weight="600" font-size="13">'+s.n+'</text>';
+  });
+  g+='</svg>';
+  document.getElementById('hub').innerHTML=g;
+})();
+</script>
