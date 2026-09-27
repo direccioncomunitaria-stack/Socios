@@ -1,6 +1,6 @@
 # Proyecto: App de juegos para familia y amigos con IA
 
-> Documento vivo de proyecto. Última actualización: 2026-09-27 (v2: mercado, precio y canal).
+> Documento vivo de proyecto. Última actualización: 2026-09-27 (v3: precios y multimedia de misterios).
 
 ## 1. Visión
 
@@ -22,6 +22,9 @@ y la IA genera contenido nuevo cuando hace falta.
 | D7 | **Precio de referencia: USD 5/mes**, con precios regionales por país en las tiendas | Aprobado |
 | D8 | **App en App Store y Google Play desde el día 1** (la web acompaña como landing) | Aprobado |
 | D9 | Idiomas: **español** al lanzamiento, **portugués (Brasil)** como segundo idioma; i18n desde el inicio | Propuesto |
+| D10 | **Precios**: Gratis (limitado) · Pase fiesta 7 días USD 1,99 · Mensual USD 4,99 · Anual USD 29,99 (plan destacado). Precios regionales en LATAM (≈ USD 2,99–3,49/mes, ≈ USD 19,99/año). Hipótesis a validar con experimentos de precio | Aprobado |
+| D11 | **Misterios con narración por voz e imágenes** (escenas y retratos de sospechosos) incluidos en el plan base. Se generan **una sola vez por caso** y se guardan; cada caso se reutiliza entre todas las cuentas | Aprobado |
+| D12 | Plan Premium (USD 7,99–9,99) reservado para música con licencia u otras funciones de alto costo | Propuesto |
 
 ## 3. Estrategia de contenido: "banco primero, IA después"
 
@@ -83,6 +86,17 @@ humano antes de publicar.
 - `historial_jugado` (grupo_id, contenido_id, jugado_en)
 - `generaciones` (id, juego_id, parametros, costo_tokens, resultado, duracion_ms) — para controlar costos
 
+### 3.4.1 Multimedia de los misterios (D11)
+
+- El generador de misterios produce, además del caso, el **texto de narración** de cada escena y
+  una **descripción de imagen** por escena y por sospechoso.
+- Un proceso posterior convierte esos textos en audio (TTS) e imágenes y los guarda en
+  almacenamiento (Supabase Storage + CDN). El caso solo se publica cuando tiene su multimedia.
+- Costo: se paga una vez por caso, no por partida. Con 60 casos iniciales + reposición, el
+  costo multimedia por suscriptor es marginal.
+- Proveedores de voz e imagen: **pendiente de elegir** (Claude genera texto, no audio ni imágenes).
+  Criterios: calidad de voz en español neutro/rioplatense y portugués, licencia comercial, costo.
+
 ## 3.5 Economía por suscriptor (USD 5/mes)
 
 | Concepto | Monto aprox. |
@@ -134,7 +148,7 @@ Implicancias:
 
 ## 7. Decisiones pendientes
 
-1. ¿Pago único/vitalicio es imprescindible o alcanza con mensual + anual?
+1. Proveedores de voz (TTS) e imágenes para los misterios.
 2. Equipo: ¿quién desarrolla/diseña además de este repo? ¿Hay cuentas de Apple Developer y Google Play Console?
 3. Nombre de la marca.
 4. Tabla de precios regionales por país (Fase 0).

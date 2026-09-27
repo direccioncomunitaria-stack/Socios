@@ -1,0 +1,21 @@
+{
+  "name": "juegos-ia",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "node --test --import tsx 'supabase/functions/_shared/**/*.test.ts'",
+    "banco:generar": "tsx scripts/generar-banco.ts",
+    "banco:cargar": "tsx scripts/cargar-banco.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.128.0",
+    "@supabase/supabase-js": "^2.117.2",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
