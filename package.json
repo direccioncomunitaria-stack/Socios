@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "test": "node --test --import tsx 'supabase/functions/_shared/**/*.test.ts'",
+    "test": "node --test --import tsx 'supabase/functions/_shared/**/*.test.ts' 'app/src/**/*.test.ts'",
     "banco:generar": "tsx scripts/generar-banco.ts",
     "banco:cargar": "tsx scripts/cargar-banco.ts"
   },
