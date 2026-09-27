@@ -1,6 +1,6 @@
 # Proyecto: App de juegos para familia y amigos con IA
 
-> Documento vivo de proyecto. Última actualización: 2026-09-27.
+> Documento vivo de proyecto. Última actualización: 2026-09-27 (v2: mercado, precio y canal).
 
 ## 1. Visión
 
@@ -18,6 +18,10 @@ y la IA genera contenido nuevo cuando hace falta.
 | D3 | "Adiviná la canción" en MVP **sin audio con derechos** (pistas con emojis/descripciones); audio real solo tras consulta legal | Aprobado |
 | D4 | No usar marcas registradas como nombre de juego (ej. "Tabú" → "Prohibido decirlo") | Aprobado |
 | D5 | Suscripción mensual como modelo base; pago único solo como anual o con límite de partidas | Aprobado |
+| D6 | **Mercado**: global a largo plazo, **lanzamiento en Latinoamérica** | Aprobado |
+| D7 | **Precio de referencia: USD 5/mes**, con precios regionales por país en las tiendas | Aprobado |
+| D8 | **App en App Store y Google Play desde el día 1** (la web acompaña como landing) | Aprobado |
+| D9 | Idiomas: **español** al lanzamiento, **portugués (Brasil)** como segundo idioma; i18n desde el inicio | Propuesto |
 
 ## 3. Estrategia de contenido: "banco primero, IA después"
 
@@ -79,6 +83,25 @@ humano antes de publicar.
 - `historial_jugado` (grupo_id, contenido_id, jugado_en)
 - `generaciones` (id, juego_id, parametros, costo_tokens, resultado, duracion_ms) — para controlar costos
 
+## 3.5 Economía por suscriptor (USD 5/mes)
+
+| Concepto | Monto aprox. |
+|----------|--------------|
+| Precio | 5,00 |
+| Comisión tienda (15% con Apple Small Business Program / Google Play suscripciones) | −0,75 |
+| Impuestos locales (varían por país; las tiendas los retienen) | variable |
+| **Ingreso neto estimado** | **≈ 3,50 – 4,25** |
+| **Tope objetivo de costo IA por suscriptor/mes** | **≤ 0,50** |
+
+Implicancias:
+- El "banco primero" no es opcional: es lo que mantiene el costo de IA bajo el tope.
+- Límite razonable de generaciones nuevas por cuenta/mes (invisible para el uso normal).
+- Usar el modelo de IA más económico que cumpla la calidad para cada juego (ej. tarjetas
+  simples con modelo chico; misterios con modelo más capaz) y medir costo real en `generaciones`.
+- Precios regionales: las tiendas permiten fijar precio por país (ej. Argentina/Brasil más
+  bajo, México/Chile cerca de USD 5). Se define en Fase 0.
+- Prueba gratis de 7 días + plan anual con descuento (ej. USD 40/año) para mejorar retención.
+
 ## 4. Arquitectura propuesta
 
 | Capa | Tecnología |
@@ -92,9 +115,11 @@ humano antes de publicar.
 ## 5. Plan por fases
 
 - **Fase 0 – Descubrimiento (2 sem.)**: precios, mercados, marca, consulta legal, diseño UX.
-- **Fase 1 – MVP web (6–8 sem.)**: auth, suscripción, banco precargado + generación,
-  juegos "Prohibido decirlo" y "Misterio", modo "pasar el teléfono".
-- **Fase 2 – App + multijugador (4–6 sem.)**: stores, salas con código/QR.
+- **Fase 1 – MVP app en tiendas (8–10 sem.)**: app Expo (iOS + Android), login,
+  suscripción con RevenueCat, banco precargado + generación, juegos "Prohibido decirlo" y
+  "Misterio", modo "pasar el teléfono", landing web. Incluye 1–2 semanas para revisión de
+  Apple/Google.
+- **Fase 2 – Multijugador y web jugable (4–6 sem.)**: salas con código/QR, jugar desde el navegador.
 - **Fase 3 – Expansión**: canciones, salas de escape, nuevas temáticas.
 
 ## 6. Riesgos
@@ -105,11 +130,11 @@ humano antes de publicar.
 | Contenido inapropiado | Validación automática + modo familia + muestreo humano |
 | Derechos de música / marcas | Sin audio en MVP, nombres propios, consulta legal |
 | Espera al generar | Generación anticipada al 20% + respaldo del banco |
+| Rechazo en revisión de tiendas | Checklist desde el diseño: borrar cuenta desde la app, restaurar compras, política de privacidad, términos de suscripción visibles, clasificación de edad. Publicar como app "familiar" (4+/9+) pero **no** en la categoría "Niños" (sus restricciones de analítica y pagos son muy estrictas) |
 
 ## 7. Decisiones pendientes
 
-1. Mercados (¿Argentina, LATAM, España?) → define moneda y pasarela.
-2. Precio mensual y si el pago único es imprescindible.
-3. Primer lanzamiento: ¿web primero o stores desde el día 1?
-4. Equipo: ¿quién desarrolla/diseña además de este repo?
-5. Nombre de la marca.
+1. ¿Pago único/vitalicio es imprescindible o alcanza con mensual + anual?
+2. Equipo: ¿quién desarrolla/diseña además de este repo? ¿Hay cuentas de Apple Developer y Google Play Console?
+3. Nombre de la marca.
+4. Tabla de precios regionales por país (Fase 0).
