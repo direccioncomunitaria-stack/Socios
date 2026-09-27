@@ -40,7 +40,7 @@ const { error, count } = await db.from("contenidos").upsert(
     origen: "precargado",
     estado: juego === "misterio" ? "pendiente" : "aprobado",
   })),
-  { onConflict: "juego,idioma,huella", ignoreDuplicates: true, count: "exact" },
+  { onConflict: "juego,idioma,tematica,huella", ignoreDuplicates: true, count: "exact" },
 );
 if (error) throw error;
 console.log(`${archivo}: ${count ?? 0} contenidos nuevos cargados.`);

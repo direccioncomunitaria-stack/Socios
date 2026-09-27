@@ -81,7 +81,7 @@ export async function reponer(
           // Los misterios esperan su audio e imágenes antes de publicarse.
           estado: p.juego === "misterio" ? "pendiente" : "aprobado",
         })),
-        { onConflict: "juego,idioma,huella", ignoreDuplicates: true },
+        { onConflict: "juego,idioma,tematica,huella", ignoreDuplicates: true },
       );
       if (errInsert) throw errInsert;
     }

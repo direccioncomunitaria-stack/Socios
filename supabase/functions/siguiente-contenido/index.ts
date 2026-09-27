@@ -23,7 +23,9 @@ const Pedido = z.object({
 const url = Deno.env.get("SUPABASE_URL")!;
 const anonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
 const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-const ia = new Anthropic(); // ANTHROPIC_API_KEY desde los secrets del proyecto
+// ANTHROPIC_API_KEY desde los secrets del proyecto. Se crea solo al reponer,
+// así servir contenido del banco funciona aunque falte la clave.
+let ia: Anthropic | undefined;
 
 Deno.serve(async (req) => {
   const pedido = Pedido.safeParse(await req.json().catch(() => null));
@@ -52,7 +54,9 @@ Deno.serve(async (req) => {
   if (fila && hayQueReponer(p.juego, fila.sin_jugar, fila.total)) {
     const admin = createClient(url, serviceKey);
     EdgeRuntime.waitUntil(
-      reponer(admin, ia, p).catch((e) => console.error("reposición falló", e)),
+      reponer(admin, (ia ??= new Anthropic()), p).catch((e) =>
+        console.error("reposición falló", e)
+      ),
     );
   }
 

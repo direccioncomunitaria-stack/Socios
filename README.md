@@ -36,5 +36,12 @@ npm run banco:generar -- prohibido peliculas facil 3
 SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... npm run banco:cargar -- banco/generado/prohibido/es-peliculas-facil.json
 ```
 
+## Supabase
+
+- Proyecto: `juegos-ia` (ref `cyzidwugypfgnnlpahpu`, región São Paulo), URL `https://cyzidwugypfgnnlpahpu.supabase.co`.
+- Migraciones aplicadas: las de `supabase/migrations/`.
+- Edge Function desplegada: `siguiente-contenido` (requiere usuario autenticado).
+- Banco inicial: 293 tarjetas de "Prohibido decirlo" (10 temáticas, dificultad fácil).
+
 Secrets de la Edge Function: `ANTHROPIC_API_KEY` (Supabase ya provee `SUPABASE_URL`,
 `SUPABASE_ANON_KEY` y `SUPABASE_SERVICE_ROLE_KEY`).
