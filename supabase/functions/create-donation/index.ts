@@ -2,7 +2,7 @@
 // Pago único o mensual por N meses (como en Charidy: el compromiso total cuenta en el termómetro).
 import { cors, db, fnBase, json, mp, paypal, settings, withParams } from "../_shared/common.ts";
 
-const AREAS = ["templo", "aulas", "tecnologia", "museo", "techo"];
+const AREAS = ["agudas", "bialik"];
 const BRAND = "Binián Atid · Comunidad Israelita de Santa Fe";
 const clean = (v: unknown, max: number) => (typeof v === "string" ? v.trim().slice(0, max) : "");
 

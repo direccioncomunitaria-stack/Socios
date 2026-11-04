@@ -98,7 +98,7 @@
   .panel-head h2{margin:6px 0 4px;color:var(--navy);font-size:30px}
   .panel-head p{margin:0;color:var(--muted)}
 
-  .areas{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px}
+  .areas{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
   .area{overflow:hidden;display:flex;flex-direction:column}
   .area .ph{aspect-ratio:16/10;overflow:hidden;position:relative;background:var(--navy)}
   .area .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
@@ -250,7 +250,7 @@
       <div class="heb">בניין עתיד</div>
       <p class="tag">Binián Atid · Construir el futuro</p>
       <h1>Honramos nuestra historia.<br>Construimos el <em>futuro</em>.</h1>
-      <p class="sub">Cinco proyectos concretos para transformar la escuela y el templo de nuestra comunidad. Durante la campaña, <b>cada donación se duplica</b>.</p>
+      <p class="sub">Dos grandes ejes para nuestra comunidad: el templo <b>Agudas Ajim</b> y la escuela <b>Bialik</b>. Durante la campaña, <b>cada donación se duplica</b>.</p>
     </div>
     <div class="hero-media" id="heroMedia">
       <img src="img/templo-render.jpg" alt="Render del nuevo frente de la Comunidad Israelita de Santa Fe">
@@ -300,7 +300,7 @@
 
     <nav class="tabs" role="tablist">
       <button class="on" data-tab="donors">Donantes <span class="count" id="tabDonors">0</span></button>
-      <button data-tab="areas">Las cinco áreas</button>
+      <button data-tab="areas">Los dos ejes</button>
       <button data-tab="about">Sobre la campaña</button>
       <button data-tab="photos">Fotos</button>
     </nav>
@@ -320,9 +320,9 @@
     <div class="panel" id="p-areas">
       <div id="areaList">
         <div class="panel-head">
-          <div class="eyebrow">Las cinco áreas</div>
-          <h2>Un proyecto integral, cinco formas de aportar</h2>
-          <p>Podés destinar tu donación al área que más te moviliza, o dejar que vaya donde más se necesite.</p>
+          <div class="eyebrow">Los dos ejes</div>
+          <h2>Templo y escuela: dos ejes, un mismo futuro</h2>
+          <p>Podés destinar tu donación a Agudas Ajim o a Bialik, o dejar que vaya donde más se necesite.</p>
         </div>
         <div class="areas" id="areas"></div>
       </div>
@@ -334,7 +334,7 @@
         <div class="card">
           <div class="eyebrow">Binián Atid</div>
           <h2 style="color:var(--navy);margin:6px 0 12px">Cada aporte construye algo que <em>queda</em>.</h2>
-          <p><b>Binián Atid</b> (<span class="heb">בניין עתיד</span>, “construir el futuro”) es la campaña comunitaria 2026 de la Comunidad Israelita de Santa Fe: cinco proyectos concretos para transformar la escuela y el templo, pensando en las próximas generaciones.</p>
+          <p><b>Binián Atid</b> (<span class="heb">בניין עתיד</span>, “construir el futuro”) es la campaña comunitaria 2026 de la Comunidad Israelita de Santa Fe. Tiene dos grandes ejes: <b>Agudas Ajim</b>, nuestro templo (con el SUM, los patios, las cocinas, los baños, la rampa de accesibilidad y el Museo de la Memoria), y <b>Bialik</b>, nuestra escuela (mejora de las aulas, tecnología y un aula inmersiva).</p>
           <p>Nuestra meta es reunir <b id="aGoal">USD 30.000</b>. Un grupo de padrinos se comprometió a <b>duplicar cada donación</b>, así que al llegar a la meta la comunidad recibe <b id="aGoalM">USD 60.000</b>.</p>
           <div class="note"><b>Dedicá tu aporte.</b>Podés hacer tu donación en honor o en memoria de un ser querido. La dedicatoria aparece junto a tu nombre en la lista de donantes.</div>
         </div>
@@ -450,34 +450,30 @@ let C = { goal_usd: 30000, match_multiplier: 2, ars_per_usd: 1460, ends_at: "202
 let DONORS = [];
 
 const AREAS = [
-  { id: "templo", num: "01", name: "Nuestro Templo", short: "Templo (Shil)", cost: 85000, img: "img/templo-render.jpg",
-    tagline: "El corazón de la Kehilá. Puesta en valor integral del Shil: el espacio de oración, baños, pintura general y la recuperación de los patios y el quincho.",
-    includes: ["Templo — puesta en valor del espacio de oración","Baños — renovación completa y accesibilidad","Pintura general — todo el edificio comunitario","Patios, quincho y mobiliario — recuperación de los exteriores"],
-    gallery: [["img/templo-lleno.jpg","El templo lleno, en cada encuentro"],["img/templo-cantar.jpg","La alegría de cantar juntos"],["img/templo-mesa.jpg","La mesa que nos reúne"],["img/templo-lagbaomer.jpg","Lag BaOmer alrededor del fuego"],["img/templo-aron.jpg","Hoy: el Aron Hakodesh y la bimá"],["img/templo-salon.jpg","Hoy: el salón principal del templo"],["img/patio-render.jpg","Patio de juegos para los chicos — renovado"]],
-    options: [["Pintura y mobiliario","",null],["Quincho / patios","",null],["Renovación de baños","",null],["Dedicatoria de un espacio","placa permanente · naming",null]],
-    note: ["Una oportunidad única de naming.","Un espacio del templo puede llevar el nombre que el donante principal elija, en honor o memoria de un ser querido."] },
-  { id: "aulas", num: "02", name: "Escuela — Aulas 3.0", short: "Escuela — Aulas 3.0", cost: 45000, img: "img/aula-hoy.jpg",
-    tagline: "El objetivo son 5 aulas renovadas; este año empezamos por 3, comenzando por secundaria. Mobiliario nuevo, guardado, tecnología y puertas vidriadas.",
-    includes: ["Pizarra digital interactiva","Computadoras en el aula","Mobiliario nuevo y flexible","Guardado y orden","Puerta vidriada: más luz","Robótica y 3D"],
-    gallery: [["img/aula-hoy.jpg","Una de nuestras aulas hoy"],["img/aulas-hoy-2.jpg","Las aulas hoy"],["img/aulas-secundaria.jpg","Secundaria: aprender haciendo"],["img/aulas-jardin.jpg","La hora del cuento en el Jardín"],["img/aulas-shabat.jpg","Shabat en la escuela"]],
-    options: [["Fondo aulas","todo suma",null],["Media aula","",7500],["Apadriná un aula","1 de las 3 de este año",15000],["Las 3 aulas completas","cubrís toda el área",45000]],
+  { id: "agudas", num: "01", name: "Agudas Ajim", short: "Agudas Ajim (templo)", kicker: "El templo", img: "img/templo-render.jpg",
+    tagline: "El corazón de la Kehilá. Puesta en valor integral del templo y de todos sus espacios: el SUM, los patios, las cocinas, los baños, la accesibilidad y el Museo de la Memoria.",
+    includes: [
+      "Templo — puesta en valor del espacio de oración y pintura general",
+      "Armado del SUM — salón de usos múltiples para la comunidad",
+      "Patios — puesta en valor de los espacios exteriores y el quincho",
+      "Cocinas — renovación y equipamiento",
+      "Baños — mejora completa",
+      "Rampa de accesibilidad — un templo abierto para todos",
+      "Museo de la Memoria — renovación del espacio, tótem con IA y nuevos recorridos",
+    ],
+    gallery: [["img/templo-lleno.jpg","El templo lleno, en cada encuentro"],["img/templo-cantar.jpg","La alegría de cantar juntos"],["img/templo-mesa.jpg","La mesa que nos reúne"],["img/templo-lagbaomer.jpg","Lag BaOmer alrededor del fuego"],["img/templo-aron.jpg","Hoy: el Aron Hakodesh y la bimá"],["img/templo-salon.jpg","Hoy: el salón principal del templo"],["img/patio-render.jpg","Así imaginamos los patios renovados"],["img/museo-render.jpg","Así quedará el Museo de la Memoria"],["img/museo-objetos.jpg","Museo: objetos y paneles históricos"]],
+    options: [["Rampa de accesibilidad","",null],["Mejora de los baños","",null],["Cocinas","",null],["Armado del SUM","",null],["Puesta en valor de los patios","",null],["Museo de la Memoria","tótem con IA, recorridos, renovación",null],["Dedicatoria de un espacio","placa permanente · naming",null]],
+    note: ["Una oportunidad única de naming.","Un espacio del templo —el SUM, el museo, los patios— puede llevar el nombre que el donante elija, en honor o memoria de un ser querido."] },
+  { id: "bialik", num: "02", name: "Bialik", short: "Bialik (escuela)", kicker: "La escuela", img: "img/aula-hoy.jpg",
+    tagline: "Educación del siglo XXI: mejora de las aulas, compra de tecnología y un aula inmersiva para que nuestros chicos aprendan con lo mejor.",
+    includes: [
+      "Mejora de las aulas — mobiliario nuevo y flexible, guardado, pizarras digitales y puertas vidriadas",
+      "Compra de tecnología — computadoras, robótica, impresión 3D y LEGO Movie Maker",
+      "Aula inmersiva — un espacio para aprender con proyección y experiencias interactivas",
+    ],
+    gallery: [["img/aula-hoy.jpg","Una de nuestras aulas hoy"],["img/aulas-hoy-2.jpg","Las aulas hoy"],["img/aulas-secundaria.jpg","Secundaria: aprender haciendo"],["img/aulas-jardin.jpg","La hora del cuento en el Jardín"],["img/aulas-shabat.jpg","Shabat en la escuela"],["img/tec-robotica.jpg","Robótica y programación en el aula"],["img/tec-clase.jpg","Tecnología en cada clase"],["img/tec-identidad.jpg","La identidad que se transmite"],["img/tec-equipo.jpg","Aprender jugando, en equipo"],["img/tec-kits.jpg","Equipos, placas y kits de robótica en uso"]],
+    options: [["Set de lápices 3D","",30],["Kit de robótica","",36],["LEGO Movie Maker","",185],["Una computadora","",875],["Media aula","mejora de un aula",7500],["Apadriná un aula","aula completa renovada",15000],["Aula inmersiva","",null]],
     note: ["Dedicá un aula.","Cada aula puede llevar una placa con el nombre del donante o de un ser querido."] },
-  { id: "tecnologia", num: "04", name: "Escuela — Tecnología", short: "Escuela — Tecnología", cost: 13600, img: "img/tec-robotica.jpg",
-    tagline: "Computadoras, robótica, impresión 3D, pizarras digitales y sala inmersiva. Educación del siglo XXI.",
-    includes: ["15 computadoras nuevas","LEGO Movie Maker","Lápices 3D (×8)","Filamento y kits de motores","Próximo paso: sala inmersiva y pizarras digitales"],
-    gallery: [["img/tec-robotica.jpg","Robótica y programación en el aula"],["img/tec-clase.jpg","Tecnología en cada clase"],["img/tec-identidad.jpg","La identidad que se transmite"],["img/tec-equipo.jpg","Aprender jugando, en equipo"],["img/tec-kits.jpg","Equipos, placas y kits de robótica en uso"]],
-    options: [["Set de lápices 3D","",30],["Kit de robótica","",36],["LEGO Movie Maker","",185],["Una computadora","",875]], note: null },
-  { id: "museo", num: "05", name: "Museo de la Memoria", short: "Museo de la Memoria", cost: 12000, img: "img/museo-render.jpg",
-    tagline: "Un espacio que cuenta quiénes somos: renovación del espacio, tótem con IA e impresión de nuevos recorridos.",
-    includes: ["Renovación del espacio — puesta en valor de las salas","Tótem con IA — información interactiva","Impresión de nuevos recorridos — paneles y contenidos actualizados"],
-    gallery: [["img/museo-render.jpg","Así quedará el museo modernizado"],["img/museo-objetos.jpg","Objetos y paneles históricos"]],
-    options: [["Impresión de recorridos","aporte medio",null],["Tótem con IA","aporte medio",null],["Renovación del espacio","aporte mayor",null],["Dedicatoria del Museo","a convenir",null]],
-    note: ["Un legado cultural.","Quien dedique el museo deja su nombre asociado a la preservación de la memoria de la comunidad."] },
-  { id: "techo", num: "03", name: "Escuela — El Techo", short: "Escuela — Techo", cost: 40000, img: "img/techo-edificio.jpg", funded: true,
-    tagline: "La obra que protege todo lo demás. Ya financiada por la comunidad y en plena ejecución.",
-    includes: ["Reemplazo de la cubierta vieja por chapa nueva","Nueva estructura del techo","Obra ya financiada por la comunidad"],
-    gallery: [["img/techo-obra.jpg","La obra del nuevo techo, en ejecución"],["img/techo-cubierta.jpg","Reemplazo de la cubierta vieja por chapa nueva"],["img/techo-edificio.jpg","La obra en marcha sobre el edificio"]],
-    options: [], note: ["El primer paso ya está dado.","El techo es la prueba concreta de que la comunidad se compromete y avanza."] },
 ];
 
 /* ---------- helpers ---------- */
@@ -546,7 +542,7 @@ $$(".tabs button").forEach(b => b.onclick = () => {
 
 /* ---------- areas ---------- */
 $("#areas").innerHTML = AREAS.map(a => `<article class="card area">
-  <div class="ph"><img src="${a.img}" alt="${esc(a.name)}" loading="lazy"><span class="num">ÁREA ${a.num}</span>${a.funded?'<span class="done">✓ Financiado</span>':""}</div>
+  <div class="ph"><img src="${a.img}" alt="${esc(a.name)}" loading="lazy"><span class="num">EJE ${a.num} · ${esc(a.kicker).toUpperCase()}</span></div>
   <div class="body"><h3>${esc(a.name)}</h3><p>${esc(a.tagline)}</p>
     ${a.funded?"":`<div class="raisedA"><span>Recaudado en la campaña</span><b data-araised="${a.id}">USD 0</b></div>`}
     <div class="actions"><button class="btn btn-ghost" data-more="${a.id}">Ver proyecto</button>
@@ -558,14 +554,14 @@ function renderAreaTotals(){ $$("[data-araised]").forEach(e => e.textContent = u
 function openDetail(id){
   const a = AREAS.find(x=>x.id===id);
   $("#detail").innerHTML = `
-    <button class="btn btn-ghost btn-sm" id="back">← Volver a las cinco áreas</button>
+    <button class="btn btn-ghost btn-sm" id="back">← Volver a los dos ejes</button>
     <div class="detail-grid">
-      <div class="card"><div class="eyebrow">Proyecto ${a.num}</div><h2>${esc(a.name)}</h2>
+      <div class="card"><div class="eyebrow">Eje ${a.num} · ${esc(a.kicker)}</div><h2>${esc(a.name)}</h2>
         <p style="color:var(--muted);margin:0">${esc(a.tagline)}</p>
         <div class="gallery">${a.gallery.map(([src,cap])=>`<figure><img src="${src}" alt="${esc(cap)}" loading="lazy"><figcaption>${esc(cap)}</figcaption></figure>`).join("")}</div></div>
       <div class="card">
-        <div class="invest"><div class="eyebrow">Inversión del proyecto</div><b>${usd(a.cost)}</b>
-          <small>≈ ${ars(a.cost)} ARS${a.funded?" · ya financiado ✓":` · recaudado en esta campaña: ${usd(C.by_area?.[a.id]||0)}`}</small></div>
+        <div class="invest"><div class="eyebrow">Recaudado para ${esc(a.name)}</div><b>${usd(C.by_area?.[a.id]||0)}</b>
+          <small>en esta campaña, con el matching x${M()}</small></div>
         <h3 style="color:var(--navy);margin:0">Qué incluye</h3>
         <ul class="inc">${a.includes.map(i=>`<li>${esc(i)}</li>`).join("")}</ul>
         ${a.options.length?`<h3 style="color:var(--navy);margin:20px 0 10px">Cómo sumarse</h3>
