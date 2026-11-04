@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Binián Atid · Comunidad Israelita de Santa Fe</title>
+<meta name="description" content="Binián Atid · Construir el futuro. Cada donación se duplica x2. Campaña de la Comunidad Israelita de Santa Fe.">
+<meta property="og:title" content="Binián Atid · Cada donación se duplica x2">
+<meta property="og:description" content="Honramos nuestra historia. Construimos el futuro. Sumate: cada peso que dones vale el doble.">
+<meta property="og:image" content="img/templo-render.jpg">
+<link rel="icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@400;500;600;700&family=Frank+Ruhl+Libre:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14284b; --navy-2:#1d3561; --navy-3:#0e1d38;
+    --gold:#c9a24a; --gold-2:#b08a35; --gold-soft:#f6efdf;
+    --bg:#f5f3ee; --card:#fff; --text:#1b2433; --muted:#6b7280; --line:#e6e1d6;
+    --ok:#2f7d4f; --err:#b42318; --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+  h1,h2,h3,h4{font-family:"Playfair Display",Georgia,serif;font-weight:700}
+  em{font-family:"Playfair Display",Georgia,serif;font-style:italic;color:var(--gold);font-weight:500}
+  .heb{font-family:"Frank Ruhl Libre",serif;direction:rtl}
+  img{max-width:100%;display:block}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 16px}
+  .eyebrow{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600}
+
+  header.top{background:var(--navy-3);position:sticky;top:0;z-index:20;border-bottom:1px solid rgba(255,255,255,.08)}
+  header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:12px}
+  .logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff}
+  .logo img{height:44px;width:auto;background:#fff;border-radius:6px;padding:3px 6px}
+  .logo span{font-family:"Playfair Display",serif;font-size:18px}
+  .btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;border:0;border-radius:10px;padding:14px 22px;font:inherit;font-weight:600;font-size:16px;cursor:pointer;text-decoration:none;transition:.15s}
+  .btn:disabled{opacity:.6;cursor:wait}
+  .btn-gold{background:var(--gold);color:var(--navy-3)}
+  .btn-gold:hover{background:var(--gold-2);color:#fff}
+  .btn-sm{padding:9px 16px;font-size:14px}
+  .btn-navy{background:var(--navy);color:#fff}
+  .btn-navy:hover{background:var(--navy-2)}
+  .btn-ghost{background:#fff;border:1px solid var(--line);color:var(--navy)}
+
+  .hero{background:radial-gradient(1200px 500px at 80% -10%,var(--navy-2),transparent),var(--navy);color:#fff}
+  .hero .wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center;padding:48px 16px 150px}
+  .hero .heb{font-size:clamp(34px,5vw,54px);color:var(--gold);margin:10px 0 0}
+  .hero .tag{font-family:"Playfair Display",serif;font-style:italic;opacity:.85;margin:0 0 18px}
+  .hero h1{font-size:clamp(30px,4.4vw,48px);line-height:1.12;margin:0 0 16px}
+  .hero p.sub{font-size:17px;opacity:.85;margin:0;max-width:520px}
+  .hero-media{border-radius:var(--radius);overflow:hidden;aspect-ratio:16/10;background:var(--navy-2);box-shadow:0 20px 50px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.12);position:relative}
+  .hero-media img,.hero-media iframe{width:100%;height:100%;object-fit:cover;border:0}
+  .x2-badge{position:absolute;right:14px;bottom:14px;background:var(--gold);color:var(--navy-3);border-radius:999px;width:92px;height:92px;display:grid;place-items:center;text-align:center;font-weight:700;line-height:1;box-shadow:0 8px 20px rgba(0,0,0,.35);transform:rotate(-8deg)}
+  .x2-badge b{font-family:"Playfair Display",serif;font-size:34px;display:block}
+  .x2-badge small{font-size:10px;letter-spacing:1px;text-transform:uppercase}
+
+  .stats{margin:-110px auto 0;position:relative;z-index:2}
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:0 10px 30px rgba(20,40,75,.08);border:1px solid var(--line)}
+  .stats .card{padding:28px}
+  .stats-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:32px;align-items:center}
+  .raised{font-family:"Playfair Display",serif;font-size:clamp(40px,6vw,60px);font-weight:700;color:var(--navy);line-height:1}
+  .goal{color:var(--muted);font-size:17px;margin-top:6px}
+  .goal b{color:var(--text)}
+  .bar{height:18px;background:#ece7db;border-radius:999px;overflow:hidden;margin:18px 0 10px;position:relative}
+  .bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-2));border-radius:999px;transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
+  .bar-meta{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);gap:8px;flex-wrap:wrap}
+  .bar-meta b{color:var(--text)}
+  .match{display:flex;align-items:center;gap:14px;background:var(--gold-soft);border:1px dashed var(--gold);border-radius:12px;padding:12px 14px;margin-top:18px}
+  .match .x{font-family:"Playfair Display",serif;font-size:34px;font-weight:700;color:var(--gold-2);min-width:56px;text-align:center}
+  .match small{color:var(--muted);display:block}
+  .side{display:flex;flex-direction:column;gap:14px}
+  .cd-label{text-align:center;font-size:13px;color:var(--muted);margin-bottom:-6px}
+  .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center}
+  .countdown div{background:var(--bg);border-radius:10px;padding:10px 4px}
+  .countdown b{display:block;font-family:"Playfair Display",serif;font-size:26px;color:var(--navy)}
+  .countdown small{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+  .side .btn-gold{width:100%;font-size:18px;padding:16px}
+  .share{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  .share a,.share button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 12px;font:inherit;font-size:13px;color:var(--text);text-decoration:none;cursor:pointer}
+
+  /* Quick amounts (estilo Charidy) */
+  .quick{margin-top:22px}
+  .quick h3{margin:0 0 10px;color:var(--navy);font-size:20px}
+  .quick-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+  .qa{border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px;text-align:left;cursor:pointer;font:inherit;transition:.15s}
+  .qa:hover{border-color:var(--gold);background:var(--gold-soft)}
+  .qa b{display:block;font-size:20px;color:var(--navy)}
+  .qa small{color:var(--gold-2);font-weight:600}
+
+  .tabs{display:flex;gap:4px;margin:40px 0 0;border-bottom:2px solid var(--line);overflow-x:auto}
+  .tabs button{background:none;border:0;padding:14px 18px;font:inherit;font-weight:500;font-size:15px;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap}
+  .tabs button.on{color:var(--navy);border-color:var(--gold);font-weight:600}
+  .tabs .count{background:#ece7db;border-radius:999px;padding:1px 8px;font-size:12px;margin-left:4px}
+  .panel{display:none;padding:28px 0 64px}
+  .panel.on{display:block}
+  .panel-head{margin-bottom:20px}
+  .panel-head h2{margin:6px 0 4px;color:var(--navy);font-size:30px}
+  .panel-head p{margin:0;color:var(--muted)}
+
+  .areas{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px}
+  .area{overflow:hidden;display:flex;flex-direction:column}
+  .area .ph{aspect-ratio:16/10;overflow:hidden;position:relative;background:var(--navy)}
+  .area .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .area:hover .ph img{transform:scale(1.04)}
+  .area .num{position:absolute;top:12px;left:12px;background:var(--navy);color:var(--gold);font-size:11px;letter-spacing:2px;font-weight:600;padding:5px 10px;border-radius:6px}
+  .area .done{position:absolute;top:12px;right:12px;background:var(--ok);color:#fff;font-size:12px;font-weight:600;padding:5px 10px;border-radius:6px}
+  .area .body{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1}
+  .area h3{margin:0;color:var(--navy);font-size:22px}
+  .area p{margin:6px 0 0;color:var(--muted);font-size:14px;flex:1}
+  .area .raisedA{margin-top:14px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;display:flex;justify-content:space-between}
+  .area .raisedA b{color:var(--navy)}
+  .area .actions{display:flex;gap:8px;margin-top:14px}
+  .area .actions .btn{flex:1;padding:11px;font-size:14px}
+
+  .detail{display:none}
+  .detail.on{display:block}
+  .detail-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;margin-top:16px}
+  .detail .card{padding:24px}
+  .detail h2{color:var(--navy);margin:6px 0 8px;font-size:34px}
+  .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
+  .gallery figure{margin:0}
+  .gallery img{border-radius:10px;aspect-ratio:4/3;object-fit:cover;width:100%;cursor:zoom-in}
+  .gallery figcaption{font-size:12px;color:var(--muted);margin-top:4px}
+  .inc{list-style:none;padding:0;margin:12px 0 0}
+  .inc li{padding:8px 0 8px 22px;border-bottom:1px solid var(--line);position:relative;font-size:15px}
+  .inc li:before{content:"";position:absolute;left:4px;top:15px;width:8px;height:8px;border-radius:50%;background:var(--gold)}
+  .invest{background:var(--navy);color:#fff;border-radius:12px;padding:18px;margin:4px 0 16px}
+  .invest .eyebrow{font-size:11px}
+  .invest b{display:block;font-family:"Playfair Display",serif;font-size:32px;margin-top:4px}
+  .invest small{opacity:.75}
+  .opts{display:flex;flex-direction:column;gap:8px}
+  .opt{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;text-align:left;border:1px solid var(--line);border-radius:10px;background:#fff;padding:12px 14px;font:inherit;cursor:pointer}
+  .opt:hover{border-color:var(--gold);background:var(--gold-soft)}
+  .opt small{display:block;color:var(--muted);font-size:12px}
+  .opt .p{color:var(--gold-2);font-weight:600;white-space:nowrap;text-align:right}
+  .opt .p small{color:var(--muted);font-weight:400}
+  .note{background:var(--gold-soft);border-left:3px solid var(--gold);border-radius:8px;padding:12px 14px;margin-top:16px;font-size:14px}
+  .note b{font-family:"Playfair Display",serif;font-size:16px;display:block;color:var(--navy)}
+
+  .about{display:grid;grid-template-columns:1.5fr 1fr;gap:24px}
+  .about .card{padding:28px}
+  .about h3{color:var(--navy);margin-top:0}
+  .steps{list-style:none;padding:0;margin:0;counter-reset:s}
+  .steps li{counter-increment:s;padding:10px 0 10px 40px;position:relative;border-bottom:1px solid var(--line);font-size:15px}
+  .steps li:before{content:counter(s);position:absolute;left:0;top:9px;width:28px;height:28px;border-radius:50%;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-weight:700;font-size:14px}
+
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+  .toolbar input,.toolbar select{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+  .toolbar input{flex:1;min-width:180px}
+  .donors{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+  .donor{padding:16px;display:flex;gap:12px;align-items:flex-start}
+  .avatar{width:42px;height:42px;border-radius:50%;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-weight:700;flex:none;font-family:"Playfair Display",serif}
+  .donor .name{font-weight:600}
+  .donor .amt{color:var(--navy);font-weight:700}
+  .donor .mx{display:inline-block;background:var(--gold-soft);color:var(--gold-2);border-radius:6px;font-size:11px;font-weight:700;padding:1px 6px;margin-left:6px;vertical-align:middle}
+  .donor .rec{font-size:12px;color:var(--muted)}
+  .donor .msg{font-size:14px;color:var(--muted);margin-top:4px;font-style:italic}
+  .donor .ded{font-size:13px;color:var(--navy-2);margin-top:2px}
+  .donor .when{font-size:12px;color:var(--muted)}
+  .empty{text-align:center;padding:40px 16px;color:var(--muted)}
+  .empty b{display:block;font-family:"Playfair Display",serif;color:var(--navy);font-size:22px;margin-bottom:6px}
+
+  .photos{columns:3 260px;column-gap:12px}
+  .photos img{width:100%;border-radius:10px;margin-bottom:12px;break-inside:avoid;cursor:zoom-in}
+  .lb{position:fixed;inset:0;background:rgba(8,15,30,.92);display:none;align-items:center;justify-content:center;z-index:60;padding:16px;cursor:zoom-out}
+  .lb.on{display:flex}
+  .lb img{max-height:90vh;max-width:100%;border-radius:8px}
+
+  /* Modal */
+  .modal{position:fixed;inset:0;background:rgba(8,15,30,.6);display:none;align-items:center;justify-content:center;padding:16px;z-index:50}
+  .modal.on{display:flex}
+  .modal .card{width:100%;max-width:520px;padding:24px;max-height:94vh;overflow:auto}
+  .modal h3{margin:0 0 2px;color:var(--navy);font-size:24px}
+  .close{float:right;background:none;border:0;font-size:26px;cursor:pointer;color:var(--muted);line-height:1}
+  .sec{font-size:13px;font-weight:600;color:var(--navy);text-transform:uppercase;letter-spacing:1px;margin:18px 0 8px}
+  .seg{display:flex;background:var(--bg);border-radius:10px;padding:4px}
+  .seg button{flex:1;border:0;background:none;padding:10px 8px;border-radius:8px;font:inherit;cursor:pointer;font-size:15px}
+  .seg button.on{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1);font-weight:600;color:var(--navy)}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chips button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font:inherit;font-size:14px;cursor:pointer}
+  .chips button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .chips input{width:90px;border:1px solid var(--line);border-radius:999px;padding:7px 12px;font:inherit;font-size:14px}
+  .amounts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .amounts button{padding:10px 4px;border:1px solid var(--line);border-radius:10px;background:#fff;font:inherit;cursor:pointer;color:var(--navy);line-height:1.2}
+  .amounts button b{display:block;font-size:17px}
+  .amounts button small{font-size:11px;color:var(--gold-2);font-weight:600}
+  .amounts button.on{border-color:var(--gold);background:var(--gold-soft)}
+  .amt-in{display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:8px;background:#fff}
+  .amt-in span{padding:0 12px;color:var(--muted);font-weight:600}
+  .amt-in input{flex:1;border:0;padding:12px 12px 12px 0;font:inherit;font-size:18px;font-weight:700;color:var(--navy);outline:none;min-width:0}
+  .amt-in small{padding:0 12px;color:var(--muted);font-size:12px;white-space:nowrap}
+  .split{font-size:13px;margin-top:8px;display:flex;gap:6px;align-items:center;color:var(--muted)}
+  .impact{background:var(--navy);color:#fff;border-radius:12px;padding:14px 16px;margin-top:14px;font-size:15px}
+  .impact .big{font-family:"Playfair Display",serif;font-size:28px;color:var(--gold);display:block;line-height:1.2}
+  .impact small{opacity:.75;display:block}
+  .pay{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pay label{border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;display:block;background:#fff}
+  .pay label:has(input:checked){border-color:var(--gold);background:var(--gold-soft)}
+  .pay input{margin:0 6px 0 0}
+  .pay b{font-size:15px;color:var(--navy)}
+  .pay small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+  .field{display:flex;flex-direction:column;gap:4px;margin-bottom:10px;font-size:14px;min-width:0}
+  .field input,.field select,.field textarea{width:100%}
+  .field input,.field textarea,.field select{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .row{display:flex;gap:8px;align-items:center;font-size:14px;margin-bottom:10px}
+  .dedic{display:none}
+  .dedic.on{display:grid}
+  .modal .go{width:100%;margin-top:6px;font-size:17px}
+  .ferr{color:var(--err);font-size:14px;margin:8px 0 0;min-height:1em}
+  .secure{font-size:12px;color:var(--muted);text-align:center;margin:10px 0 0}
+
+  .toast{position:fixed;left:16px;bottom:16px;z-index:40;visibility:hidden;background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.15);padding:12px 16px;max-width:320px;transform:translateY(150%);transition:transform .4s}
+  .toast.on{transform:none;visibility:visible}
+  .toast b{color:var(--navy)}
+
+  footer{background:var(--navy-3);color:#c6cfdd;text-align:center;padding:48px 16px;font-size:14px}
+  footer .heb{color:var(--gold);font-size:34px;margin:12px 0 0}
+  footer h3{color:#fff;font-size:26px;margin:6px 0 8px}
+  footer img{height:54px;margin:0 auto;background:#fff;border-radius:8px;padding:4px 8px}
+
+  .sticky-donate{display:none}
+  @media (max-width:860px){
+    .hero .wrap{grid-template-columns:1fr;padding-top:32px}
+    .stats-grid,.about,.detail-grid{grid-template-columns:1fr}
+    .sticky-donate{display:block;position:fixed;left:0;right:0;bottom:0;padding:10px 16px;background:#fff;border-top:1px solid var(--line);z-index:30}
+    .sticky-donate .btn{width:100%}
+    footer{padding-bottom:100px}
+    .logo span{display:none}
+    .areas{grid-template-columns:1fr}
+    .toast{bottom:84px}
+    .pay,.two{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#"><img src="img/logo.png" alt="Comunidad Israelita de Santa Fe"><span>Binián Atid</span></a>
+    <button class="btn btn-gold btn-sm" data-donate>Donar x2</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Campaña comunitaria 2026</div>
+      <div class="heb">בניין עתיד</div>
+      <p class="tag">Binián Atid · Construir el futuro</p>
+      <h1>Honramos nuestra historia.<br>Construimos el <em>futuro</em>.</h1>
+      <p class="sub">Cinco proyectos concretos para transformar la escuela y el templo de nuestra comunidad. Durante la campaña, <b>cada donación se duplica</b>.</p>
+    </div>
+    <div class="hero-media" id="heroMedia">
+      <img src="img/templo-render.jpg" alt="Render del nuevo frente de la Comunidad Israelita de Santa Fe">
+      <div class="x2-badge"><div><b class="mxv">x2</b><small>Matching</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap">
+    <div class="card">
+      <div class="stats-grid">
+        <div>
+          <div class="eyebrow" style="color:var(--gold-2)">Recaudado</div>
+          <div class="raised" id="raised">USD 0</div>
+          <div class="goal">de una meta de <b id="goal">USD 60.000</b></div>
+          <div class="bar"><span id="barFill"></span></div>
+          <div class="bar-meta"><span><b id="pct">0%</b> de la meta</span><span><b id="donorCount">0</b> donantes</span><span>Faltan <b id="left">USD 60.000</b></span></div>
+          <div class="match">
+            <div class="x mxv">x2</div>
+            <div><b>¡Tu donación se duplica!</b><small id="matchText">Un grupo de padrinos iguala cada aporte: si donás USD 100, la campaña recibe USD 200.</small></div>
+          </div>
+        </div>
+        <div class="side">
+          <div class="cd-label" id="cdLabel">La campaña termina en</div>
+          <div class="countdown">
+            <div><b id="cdD">0</b><small>días</small></div>
+            <div><b id="cdH">00</b><small>horas</small></div>
+            <div><b id="cdM">00</b><small>min</small></div>
+            <div><b id="cdS">00</b><small>seg</small></div>
+          </div>
+          <button class="btn btn-gold" data-donate>Donar ahora</button>
+          <div class="share">
+            <a id="shWa" target="_blank" rel="noopener">WhatsApp</a>
+            <a id="shFb" target="_blank" rel="noopener">Facebook</a>
+            <a id="shMail">Email</a>
+            <button id="shCopy">Copiar link</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quick">
+      <h3>Elegí tu aporte</h3>
+      <div class="quick-grid" id="quick"></div>
+    </div>
+
+    <nav class="tabs" role="tablist">
+      <button class="on" data-tab="donors">Donantes <span class="count" id="tabDonors">0</span></button>
+      <button data-tab="areas">Las cinco áreas</button>
+      <button data-tab="about">Sobre la campaña</button>
+      <button data-tab="photos">Fotos</button>
+    </nav>
+
+    <div class="panel on" id="p-donors">
+      <div class="toolbar">
+        <input id="q" type="search" placeholder="Buscar donante…">
+        <select id="sort">
+          <option value="recent">Más recientes</option>
+          <option value="amount">Mayor monto</option>
+          <option value="name">Nombre A-Z</option>
+        </select>
+      </div>
+      <div class="donors" id="donors"></div>
+    </div>
+
+    <div class="panel" id="p-areas">
+      <div id="areaList">
+        <div class="panel-head">
+          <div class="eyebrow">Las cinco áreas</div>
+          <h2>Un proyecto integral, cinco formas de aportar</h2>
+          <p>Podés destinar tu donación al área que más te moviliza, o dejar que vaya donde más se necesite.</p>
+        </div>
+        <div class="areas" id="areas"></div>
+      </div>
+      <div class="detail" id="detail"></div>
+    </div>
+
+    <div class="panel" id="p-about">
+      <div class="about">
+        <div class="card">
+          <div class="eyebrow">Binián Atid</div>
+          <h2 style="color:var(--navy);margin:6px 0 12px">Cada aporte construye algo que <em>queda</em>.</h2>
+          <p><b>Binián Atid</b> (<span class="heb">בניין עתיד</span>, “construir el futuro”) es la campaña comunitaria 2026 de la Comunidad Israelita de Santa Fe: cinco proyectos concretos para transformar la escuela y el templo, pensando en las próximas generaciones.</p>
+          <p>Nuestra meta es reunir <b id="aGoal">USD 30.000</b>. Un grupo de padrinos se comprometió a <b>duplicar cada donación</b>, así que al llegar a la meta la comunidad recibe <b id="aGoalM">USD 60.000</b>.</p>
+          <div class="note"><b>Dedicá tu aporte.</b>Podés hacer tu donación en honor o en memoria de un ser querido. La dedicatoria aparece junto a tu nombre en la lista de donantes.</div>
+        </div>
+        <div class="card">
+          <h3>¿Cómo funciona?</h3>
+          <ol class="steps">
+            <li>Elegí un monto y si querés pagar <b>una vez</b> o <b>en cuotas mensuales</b>, durante la cantidad de meses que prefieras.</li>
+            <li>Pagá con <b>Mercado Pago</b> (en pesos) o <b>PayPal</b> (en dólares).</li>
+            <li>Tu donación se <b>duplica</b> y suma al contador apenas se confirma el pago.</li>
+            <li>Si elegís cuotas, el total comprometido cuenta desde el primer pago.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="p-photos"><div class="photos" id="photos"></div></div>
+  </div>
+</section>
+
+<footer>
+  <img src="img/logo.png" alt="Comunidad Israelita de Santa Fe">
+  <div class="heb">בניין עתיד</div>
+  <p style="font-family:'Playfair Display',serif;font-style:italic;margin:0">Binián Atid · Construir el futuro</p>
+  <h3>Cada aporte construye algo que <em>queda</em>.</h3>
+  <p>Gracias por acompañar a la Comunidad Israelita de Santa Fe.</p>
+  <p id="contact"></p>
+</footer>
+
+<div class="sticky-donate"><button class="btn btn-gold" data-donate>Donar ahora · x2</button></div>
+<div class="lb" id="lb"><img alt=""></div>
+<div class="toast" id="toast"></div>
+
+<!-- Modal de donación -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="card">
+    <button class="close" data-close aria-label="Cerrar">×</button>
+    <h3 id="mTitle">Doná a Binián Atid</h3>
+    <div style="color:var(--muted);font-size:14px" id="mSub">Tu donación se duplica <b class="mxv">x2</b></div>
+
+    <div class="sec">Frecuencia</div>
+    <div class="seg" id="freq">
+      <button class="on" data-f="once">Una vez</button>
+      <button data-f="monthly">Mensual (en cuotas)</button>
+    </div>
+    <div id="monthsBox" style="display:none;margin-top:10px">
+      <div style="font-size:14px;margin-bottom:6px">¿Durante cuántos meses?</div>
+      <div class="chips" id="monthChips"></div>
+    </div>
+
+    <div class="sec" id="amtLabel">Monto</div>
+    <div class="amounts" id="amounts"></div>
+    <div class="amt-in"><span>USD</span><input id="mAmount" type="number" min="1" step="1" inputmode="decimal" aria-label="Monto en dólares"><small id="arsEq"></small></div>
+    <label class="split" id="splitBox" style="display:none"><input type="checkbox" id="mSplit"> Prefiero ingresar el total y dividirlo en cuotas</label>
+
+    <div class="impact" id="impact"></div>
+
+    <div class="sec">Medio de pago</div>
+    <div class="pay">
+      <label><input type="radio" name="prov" value="mercadopago" checked><b>Mercado Pago</b><small>En pesos · tarjeta, débito o dinero en cuenta</small></label>
+      <label><input type="radio" name="prov" value="paypal"><b>PayPal</b><small>En dólares · tarjeta internacional</small></label>
+    </div>
+
+    <div class="sec">Tus datos</div>
+    <div class="two">
+      <div class="field"><label for="mName">Nombre y apellido</label><input id="mName" autocomplete="name" maxlength="120"></div>
+      <div class="field"><label for="mEmail">Email</label><input id="mEmail" type="email" autocomplete="email" maxlength="160"></div>
+    </div>
+    <div class="two">
+      <div class="field"><label for="mPhone">Teléfono (opcional)</label><input id="mPhone" type="tel" autocomplete="tel" maxlength="40"></div>
+      <div class="field"><label for="mArea">Destino</label><select id="mArea"><option value="">Donde más se necesite</option></select></div>
+    </div>
+    <label class="row"><input type="checkbox" id="mDed"> Dedicar mi donación</label>
+    <div class="dedic two" id="dedic">
+      <div class="field"><select id="mDedType"><option value="En honor de">En honor de</option><option value="En memoria de">En memoria de</option></select></div>
+      <div class="field"><input id="mDedName" placeholder="Nombre" maxlength="150"></div>
+    </div>
+    <div class="field"><label for="mMsg">Mensaje (opcional)</label><textarea id="mMsg" rows="2" maxlength="500"></textarea></div>
+    <label class="row"><input type="checkbox" id="mAnon"> Mostrar mi donación como anónima</label>
+
+    <button class="btn btn-gold go" id="mGo">Donar</button>
+    <div class="ferr" id="mErr" role="alert"></div>
+    <p class="secure">🔒 El pago se procesa en la plataforma segura de Mercado Pago o PayPal.</p>
+  </div>
+</div>
+
+<!-- Modal de resultado -->
+<div class="modal" id="result" role="dialog" aria-modal="true">
+  <div class="card" style="text-align:center">
+    <button class="close" data-close aria-label="Cerrar">×</button>
+    <div class="heb" style="font-size:36px;color:var(--gold)">תודה רבה</div>
+    <h3 id="rTitle">¡Gracias!</h3>
+    <p id="rText" style="color:var(--muted)"></p>
+    <button class="btn btn-gold" data-close>Volver a la campaña</button>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   CONFIGURACIÓN
+   Meta, multiplicador (x2), cotización y fecha de cierre se manejan desde
+   Supabase → tabla campaign_settings. Acá solo se configura la conexión.
+   ===================================================================== */
+const SUPABASE_URL = "https://mwgcihrwmezqhcnhmimc.supabase.co";
+const SUPABASE_KEY = "sb_publishable_P9TrYnD7lZDZDL7sdcTW4A_7x26vGdV";   // clave pública (es segura en el navegador)
+const CONTACT = "Contacto: [nombre · tel · email]";
+const PRESETS = [36, 72, 180, 360, 500, 1000];
+const MONTHLY_PRESETS = [18, 36, 50, 100, 180, 360];   // montos sugeridos por mes
+const MONTH_OPTIONS = [3, 6, 10, 12, 18, 24];
+
+/* Valores por defecto mientras carga (y si no hay conexión). */
+let C = { goal_usd: 30000, match_multiplier: 2, ars_per_usd: 1460, ends_at: "2026-12-31T23:59:00-03:00",
+          raised_usd: 0, given_usd: 0, donors: 0, by_area: {} };
+let DONORS = [];
+
+const AREAS = [
+  { id: "templo", num: "01", name: "Nuestro Templo", short: "Templo (Shil)", cost: 85000, img: "img/templo-render.jpg",
+    tagline: "El corazón de la Kehilá. Puesta en valor integral del Shil: el espacio de oración, baños, pintura general y la recuperación de los patios y el quincho.",
+    includes: ["Templo — puesta en valor del espacio de oración","Baños — renovación completa y accesibilidad","Pintura general — todo el edificio comunitario","Patios, quincho y mobiliario — recuperación de los exteriores"],
+    gallery: [["img/templo-lleno.jpg","El templo lleno, en cada encuentro"],["img/templo-cantar.jpg","La alegría de cantar juntos"],["img/templo-mesa.jpg","La mesa que nos reúne"],["img/templo-lagbaomer.jpg","Lag BaOmer alrededor del fuego"],["img/templo-aron.jpg","Hoy: el Aron Hakodesh y la bimá"],["img/templo-salon.jpg","Hoy: el salón principal del templo"],["img/patio-render.jpg","Patio de juegos para los chicos — renovado"]],
+    options: [["Pintura y mobiliario","",null],["Quincho / patios","",null],["Renovación de baños","",null],["Dedicatoria de un espacio","placa permanente · naming",null]],
+    note: ["Una oportunidad única de naming.","Un espacio del templo puede llevar el nombre que el donante principal elija, en honor o memoria de un ser querido."] },
+  { id: "aulas", num: "02", name: "Escuela — Aulas 3.0", short: "Escuela — Aulas 3.0", cost: 45000, img: "img/aula-hoy.jpg",
+    tagline: "El objetivo son 5 aulas renovadas; este año empezamos por 3, comenzando por secundaria. Mobiliario nuevo, guardado, tecnología y puertas vidriadas.",
+    includes: ["Pizarra digital interactiva","Computadoras en el aula","Mobiliario nuevo y flexible","Guardado y orden","Puerta vidriada: más luz","Robótica y 3D"],
+    gallery: [["img/aula-hoy.jpg","Una de nuestras aulas hoy"],["img/aulas-hoy-2.jpg","Las aulas hoy"],["img/aulas-secundaria.jpg","Secundaria: aprender haciendo"],["img/aulas-jardin.jpg","La hora del cuento en el Jardín"],["img/aulas-shabat.jpg","Shabat en la escuela"]],
+    options: [["Fondo aulas","todo suma",null],["Media aula","",7500],["Apadriná un aula","1 de las 3 de este año",15000],["Las 3 aulas completas","cubrís toda el área",45000]],
+    note: ["Dedicá un aula.","Cada aula puede llevar una placa con el nombre del donante o de un ser querido."] },
+  { id: "tecnologia", num: "04", name: "Escuela — Tecnología", short: "Escuela — Tecnología", cost: 13600, img: "img/tec-robotica.jpg",
+    tagline: "Computadoras, robótica, impresión 3D, pizarras digitales y sala inmersiva. Educación del siglo XXI.",
+    includes: ["15 computadoras nuevas","LEGO Movie Maker","Lápices 3D (×8)","Filamento y kits de motores","Próximo paso: sala inmersiva y pizarras digitales"],
+    gallery: [["img/tec-robotica.jpg","Robótica y programación en el aula"],["img/tec-clase.jpg","Tecnología en cada clase"],["img/tec-identidad.jpg","La identidad que se transmite"],["img/tec-equipo.jpg","Aprender jugando, en equipo"],["img/tec-kits.jpg","Equipos, placas y kits de robótica en uso"]],
+    options: [["Set de lápices 3D","",30],["Kit de robótica","",36],["LEGO Movie Maker","",185],["Una computadora","",875]], note: null },
+  { id: "museo", num: "05", name: "Museo de la Memoria", short: "Museo de la Memoria", cost: 12000, img: "img/museo-render.jpg",
+    tagline: "Un espacio que cuenta quiénes somos: renovación del espacio, tótem con IA e impresión de nuevos recorridos.",
+    includes: ["Renovación del espacio — puesta en valor de las salas","Tótem con IA — información interactiva","Impresión de nuevos recorridos — paneles y contenidos actualizados"],
+    gallery: [["img/museo-render.jpg","Así quedará el museo modernizado"],["img/museo-objetos.jpg","Objetos y paneles históricos"]],
+    options: [["Impresión de recorridos","aporte medio",null],["Tótem con IA","aporte medio",null],["Renovación del espacio","aporte mayor",null],["Dedicatoria del Museo","a convenir",null]],
+    note: ["Un legado cultural.","Quien dedique el museo deja su nombre asociado a la preservación de la memoria de la comunidad."] },
+  { id: "techo", num: "03", name: "Escuela — El Techo", short: "Escuela — Techo", cost: 40000, img: "img/techo-edificio.jpg", funded: true,
+    tagline: "La obra que protege todo lo demás. Ya financiada por la comunidad y en plena ejecución.",
+    includes: ["Reemplazo de la cubierta vieja por chapa nueva","Nueva estructura del techo","Obra ya financiada por la comunidad"],
+    gallery: [["img/techo-obra.jpg","La obra del nuevo techo, en ejecución"],["img/techo-cubierta.jpg","Reemplazo de la cubierta vieja por chapa nueva"],["img/techo-edificio.jpg","La obra en marcha sobre el edificio"]],
+    options: [], note: ["El primer paso ya está dado.","El techo es la prueba concreta de que la comunidad se compromete y avanza."] },
+];
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s), $$ = s => document.querySelectorAll(s);
+const nf = new Intl.NumberFormat("es-AR",{maximumFractionDigits:0});
+const nf2 = new Intl.NumberFormat("es-AR",{maximumFractionDigits:2});
+const usd = n => "USD " + (Number.isInteger(+n) ? nf : nf2).format(n);
+const ars = n => "$" + nf.format(Math.round(n * C.ars_per_usd));
+const esc = s => String(s ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const M = () => +C.match_multiplier || 1;
+const goalM = () => C.goal_usd * M();
+
+async function rpc(fn, args = {}){
+  const r = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${fn}`, { method: "POST",
+    headers: { apikey: SUPABASE_KEY, "Content-Type": "application/json" }, body: JSON.stringify(args) });
+  if (!r.ok) throw new Error(fn + " " + r.status);
+  return r.json();
+}
+
+/* ---------- stats ---------- */
+let shownRaised = 0;
+function animateRaised(to){
+  const from = shownRaised, t0 = performance.now();
+  (function step(t){ const p = Math.min((t-t0)/1400,1), e = 1-Math.pow(1-p,3);
+    $("#raised").textContent = usd(Math.round(from + (to-from)*e)); if (p<1) requestAnimationFrame(step); })(t0);
+  shownRaised = to;
+}
+function renderStats(){
+  const pct = Math.floor(C.raised_usd / goalM() * 100);
+  $$(".mxv").forEach(e => e.textContent = "x" + M());
+  $("#goal").textContent = usd(goalM());
+  $("#aGoal").textContent = usd(C.goal_usd); $("#aGoalM").textContent = usd(goalM());
+  $("#left").textContent = usd(Math.max(goalM() - C.raised_usd, 0));
+  $("#pct").textContent = pct + "%";
+  $("#donorCount").textContent = C.donors; $("#tabDonors").textContent = C.donors;
+  $("#matchText").textContent = `Un grupo de padrinos iguala cada aporte: si donás USD 100, la campaña recibe ${usd(100*M())}.`;
+  $("#barFill").style.width = Math.min(pct,100) + "%";
+  animateRaised(C.raised_usd);
+  renderAreaTotals();
+}
+
+/* ---------- countdown ---------- */
+function tick(){
+  let s = Math.max(0, Math.floor((new Date(C.ends_at).getTime() - Date.now())/1000));
+  $("#cdLabel").textContent = s ? "La campaña termina en" : "La campaña finalizó";
+  $("#cdD").textContent = Math.floor(s/86400); s%=86400;
+  $("#cdH").textContent = String(Math.floor(s/3600)).padStart(2,"0"); s%=3600;
+  $("#cdM").textContent = String(Math.floor(s/60)).padStart(2,"0");
+  $("#cdS").textContent = String(s%60).padStart(2,"0");
+}
+setInterval(tick, 1000);
+
+/* ---------- quick amounts ---------- */
+function renderQuick(){
+  $("#quick").innerHTML = PRESETS.map(a => `<button class="qa" data-q="${a}"><b>${usd(a)}</b><small>= ${usd(a*M())} con x${M()}</small></button>`).join("")
+    + `<button class="qa" data-q=""><b>Otro monto</b><small>vos elegís</small></button>`;
+  $$("#quick .qa").forEach(b => b.onclick = () => openModal({ amount: +b.dataset.q || null }));
+}
+
+/* ---------- tabs ---------- */
+$$(".tabs button").forEach(b => b.onclick = () => {
+  $$(".tabs button").forEach(x=>x.classList.toggle("on",x===b));
+  $$(".panel").forEach(p=>p.classList.toggle("on",p.id==="p-"+b.dataset.tab));
+  if (b.dataset.tab === "areas") closeDetail();
+});
+
+/* ---------- areas ---------- */
+$("#areas").innerHTML = AREAS.map(a => `<article class="card area">
+  <div class="ph"><img src="${a.img}" alt="${esc(a.name)}" loading="lazy"><span class="num">ÁREA ${a.num}</span>${a.funded?'<span class="done">✓ Financiado</span>':""}</div>
+  <div class="body"><h3>${esc(a.name)}</h3><p>${esc(a.tagline)}</p>
+    ${a.funded?"":`<div class="raisedA"><span>Recaudado en la campaña</span><b data-araised="${a.id}">USD 0</b></div>`}
+    <div class="actions"><button class="btn btn-ghost" data-more="${a.id}">Ver proyecto</button>
+    ${a.funded?"":`<button class="btn btn-navy" data-area="${a.id}">Donar</button>`}</div></div></article>`).join("");
+$$("[data-more]").forEach(b => b.onclick = () => openDetail(b.dataset.more));
+$$("#areas [data-area]").forEach(b => b.onclick = () => openModal({ area: b.dataset.area }));
+function renderAreaTotals(){ $$("[data-araised]").forEach(e => e.textContent = usd(C.by_area?.[e.dataset.araised] || 0)); }
+
+function openDetail(id){
+  const a = AREAS.find(x=>x.id===id);
+  $("#detail").innerHTML = `
+    <button class="btn btn-ghost btn-sm" id="back">← Volver a las cinco áreas</button>
+    <div class="detail-grid">
+      <div class="card"><div class="eyebrow">Proyecto ${a.num}</div><h2>${esc(a.name)}</h2>
+        <p style="color:var(--muted);margin:0">${esc(a.tagline)}</p>
+        <div class="gallery">${a.gallery.map(([src,cap])=>`<figure><img src="${src}" alt="${esc(cap)}" loading="lazy"><figcaption>${esc(cap)}</figcaption></figure>`).join("")}</div></div>
+      <div class="card">
+        <div class="invest"><div class="eyebrow">Inversión del proyecto</div><b>${usd(a.cost)}</b>
+          <small>≈ ${ars(a.cost)} ARS${a.funded?" · ya financiado ✓":` · recaudado en esta campaña: ${usd(C.by_area?.[a.id]||0)}`}</small></div>
+        <h3 style="color:var(--navy);margin:0">Qué incluye</h3>
+        <ul class="inc">${a.includes.map(i=>`<li>${esc(i)}</li>`).join("")}</ul>
+        ${a.options.length?`<h3 style="color:var(--navy);margin:20px 0 10px">Cómo sumarse</h3>
+        <div class="opts">${a.options.map(([t,s,v])=>`<button class="opt" data-ov="${v??""}" data-ot="${esc(t)}"><span>${esc(t)}${s?`<small>${esc(s)}</small>`:""}</span><span class="p">${v?`${usd(v)}<small><br>vale ${usd(v*M())}</small>`:"a convenir"}</span></button>`).join("")}</div>`:""}
+        ${a.note?`<div class="note"><b>${esc(a.note[0])}</b>${esc(a.note[1])}</div>`:""}
+        ${a.funded?"":`<button class="btn btn-gold" style="width:100%;margin-top:16px" id="dArea">Donar a ${esc(a.short)}</button>`}
+      </div></div>`;
+  $("#areaList").style.display = "none"; $("#detail").classList.add("on");
+  $("#back").onclick = closeDetail;
+  if (!a.funded) $("#dArea").onclick = () => openModal({ area: a.id });
+  $$("#detail .opt").forEach(b => b.onclick = () => openModal({ amount: +b.dataset.ov || null, area: a.id, title: b.dataset.ot }));
+  $$("#detail .gallery img").forEach(i => i.onclick = () => lightbox(i.src));
+  document.querySelector(".tabs").scrollIntoView({behavior:"smooth"});
+}
+function closeDetail(){ $("#detail").classList.remove("on"); $("#areaList").style.display = ""; }
+
+/* ---------- donors ---------- */
+const ago = d => { const m = Math.floor((Date.now()-new Date(d))/60000);
+  if (m < 1) return "recién"; if (m < 60) return `hace ${m} min`; if (m < 1440) return `hace ${Math.floor(m/60)} h`; const dd = Math.floor(m/1440); return dd === 1 ? "ayer" : `hace ${dd} días`; };
+const areaName = id => AREAS.find(a=>a.id===id)?.short;
+function renderDonors(){
+  if (!DONORS.length){
+    $("#donors").innerHTML = `<div class="card empty" style="grid-column:1/-1"><b>Sé el primero en sumarte</b>Las donaciones aparecen acá apenas se confirma el pago.<br><br><button class="btn btn-gold" id="firstD">Donar ahora</button></div>`;
+    $("#firstD").onclick = () => openModal({}); return;
+  }
+  const q = $("#q").value.toLowerCase().trim(), s = $("#sort").value;
+  let list = DONORS.filter(d => !q || d.display_name.toLowerCase().includes(q) || (d.message||"").toLowerCase().includes(q) || (d.dedication||"").toLowerCase().includes(q));
+  list.sort(s==="amount"?(a,b)=>b.total_usd-a.total_usd : s==="name"?(a,b)=>a.display_name.localeCompare(b.display_name) : (a,b)=>new Date(b.approved_at)-new Date(a.approved_at));
+  $("#donors").innerHTML = list.map(d => `<div class="card donor">
+    <div class="avatar">${esc((d.display_name.trim()[0]||"?").toUpperCase())}</div>
+    <div><div class="name">${esc(d.display_name)}</div>
+      <div class="amt">${usd(d.matched_usd)}<span class="mx">x${M()}</span></div>
+      <div class="rec">${d.months>1?`${usd(d.amount_usd)}/mes × ${d.months} meses`:`Donó ${usd(d.total_usd)}`}</div>
+      ${d.dedication?`<div class="ded">${esc(d.dedication)}</div>`:""}
+      ${d.message?`<div class="msg">“${esc(d.message)}”</div>`:""}
+      <div class="when">${ago(d.approved_at)}${areaName(d.area)?` · ${esc(areaName(d.area))}`:""}</div></div></div>`).join("")
+    || `<p style="color:var(--muted)">No hay resultados.</p>`;
+}
+$("#q").oninput = renderDonors; $("#sort").onchange = renderDonors;
+
+/* ---------- photos & lightbox ---------- */
+const allPhotos = AREAS.flatMap(a => a.gallery).filter((v,i,arr)=>arr.findIndex(x=>x[0]===v[0])===i);
+$("#photos").innerHTML = allPhotos.map(([src,cap])=>`<img src="${src}" alt="${esc(cap)}" title="${esc(cap)}" loading="lazy">`).join("");
+$$("#photos img").forEach(i => i.onclick = () => lightbox(i.src));
+function lightbox(src){ $("#lb img").src = src; $("#lb").classList.add("on"); }
+$("#lb").onclick = () => $("#lb").classList.remove("on");
+
+/* ---------- toast ---------- */
+let toastT;
+function toast(html){ $("#toast").innerHTML = html; $("#toast").classList.add("on"); clearTimeout(toastT); toastT = setTimeout(()=>$("#toast").classList.remove("on"), 5000); }
+
+/* ---------- data load / live refresh ---------- */
+let firstLoad = true;
+async function load(){
+  try {
+    const [c, d] = await Promise.all([rpc("get_campaign"), rpc("get_donors", { p_limit: 500, p_offset: 0 })]);
+    const known = new Set(DONORS.map(x=>x.id));
+    const fresh = firstLoad ? [] : d.filter(x => !known.has(x.id));
+    C = { ...C, ...c }; DONORS = d;
+    renderStats(); renderDonors(); renderQuick(); tick();
+    if (fresh.length) toast(`<b>${esc(fresh[0].display_name)}</b> acaba de donar <b>${usd(fresh[0].matched_usd)}</b> (x${M()}) 🎉`);
+  } catch (e) {
+    console.warn("Sin conexión con la base de datos", e);
+    if (firstLoad){ renderStats(); renderDonors(); renderQuick(); tick(); }
+  }
+  firstLoad = false;
+}
+load(); setInterval(load, 20000);
+
+/* =====================================================================
+   MODAL DE DONACIÓN (único / mensual por N meses)
+   ===================================================================== */
+const st = { freq: "once", months: 12, split: false, title: "" };
+$("#mArea").innerHTML += AREAS.filter(a=>!a.funded).map(a=>`<option value="${a.id}">${esc(a.short)}</option>`).join("");
+$("#monthChips").innerHTML = MONTH_OPTIONS.map(m=>`<button data-m="${m}">${m}</button>`).join("")
+  + `<input id="mMonths" type="number" min="2" max="60" placeholder="Otro" aria-label="Otra cantidad de meses">`;
+
+function renderPresets(){
+  const per = st.freq === "monthly" && !st.split;
+  const list = per ? MONTHLY_PRESETS : PRESETS;
+  $("#amounts").innerHTML = list.map(a=>`<button data-a="${a}"><b>${usd(a)}</b><small>vale ${usd(a*M()*(per?st.months:1))}</small></button>`).join("");
+  $$("#amounts button").forEach(b => b.onclick = () => { $("#mAmount").value = b.dataset.a; upd(); });
+}
+function upd(){
+  const v = +$("#mAmount").value || 0, monthly = st.freq === "monthly";
+  const n = monthly ? st.months : 1;
+  const per = monthly && st.split ? Math.round(v / n * 100) / 100 : v;
+  const total = Math.round(per * n * 100) / 100;
+  $$("#amounts button").forEach(b=>b.classList.toggle("on", +b.dataset.a === v));
+  $$("#monthChips button").forEach(b=>b.classList.toggle("on", +b.dataset.m === st.months));
+  $("#monthsBox").style.display = monthly ? "" : "none";
+  $("#splitBox").style.display = monthly ? "" : "none";
+  $("#amtLabel").textContent = monthly ? (st.split ? "Monto total" : "Monto por mes") : "Monto";
+  $("#arsEq").textContent = v ? `≈ ${ars(v)} ARS` : "";
+  if (!v){ $("#impact").innerHTML = "Elegí o escribí un monto"; $("#mGo").textContent = "Donar"; return; }
+  $("#impact").innerHTML = monthly
+    ? `Pagás <b>${usd(per)}</b> por mes durante <b>${n} meses</b> (total ${usd(total)})<span class="big">La campaña recibe ${usd(total*M())}</span><small>El total comprometido suma al contador desde el primer pago.</small>`
+    : `Donás <b>${usd(total)}</b><span class="big">La campaña recibe ${usd(total*M())}</span><small>Gracias al matching x${M()} de los padrinos.</small>`;
+  $("#mGo").textContent = monthly ? `Donar ${usd(per)} / mes × ${n}` : `Donar ${usd(total)}`;
+}
+$$("#freq button").forEach(b => b.onclick = () => { st.freq = b.dataset.f; $$("#freq button").forEach(x=>x.classList.toggle("on",x===b)); renderPresets(); upd(); });
+$$("#monthChips button").forEach(b => b.onclick = () => { st.months = +b.dataset.m; $("#mMonths").value = ""; renderPresets(); upd(); });
+$("#mMonths").oninput = e => { const m = Math.trunc(+e.target.value); if (m >= 2 && m <= 60){ st.months = m; renderPresets(); upd(); } };
+$("#mSplit").onchange = e => { st.split = e.target.checked; renderPresets(); upd(); };
+$("#mAmount").oninput = upd;
+$("#mDed").onchange = () => $("#dedic").classList.toggle("on", $("#mDed").checked);
+
+function openModal({ amount = null, area = "", title = "" } = {}){
+  st.title = title;
+  renderPresets();
+  $("#mAmount").value = amount || PRESETS[2];
+  $("#mArea").value = area || "";
+  $("#mSub").innerHTML = title ? `${esc(title)} · se duplica <b>x${M()}</b>` : `Tu donación se duplica <b>x${M()}</b>`;
+  $("#mErr").textContent = "";
+  upd();
+  $("#modal").classList.add("on");
+}
+$$("[data-donate]").forEach(b => b.onclick = () => openModal());
+$$("[data-close]").forEach(b => b.onclick = () => $$(".modal").forEach(m=>m.classList.remove("on")));
+$$(".modal").forEach(m => m.onclick = e => { if (e.target === m) m.classList.remove("on"); });
+document.addEventListener("keydown", e => { if (e.key === "Escape"){ $$(".modal").forEach(m=>m.classList.remove("on")); $("#lb").classList.remove("on"); } });
+
+$("#mGo").onclick = async () => {
+  const err = t => { $("#mErr").textContent = t; };
+  const v = +$("#mAmount").value, monthly = st.freq === "monthly", n = monthly ? st.months : 1;
+  const per = monthly && st.split ? Math.round(v / n * 100) / 100 : v;
+  const name = $("#mName").value.trim(), email = $("#mEmail").value.trim();
+  if (!(per >= 1)) return err(monthly ? "El monto por mes debe ser de al menos USD 1." : "Ingresá un monto válido.");
+  if (!name) return err("Completá tu nombre.");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return err("Ingresá un email válido.");
+  const provider = document.querySelector('input[name="prov"]:checked').value;
+  const dedication = $("#mDed").checked && $("#mDedName").value.trim() ? `${$("#mDedType").value} ${$("#mDedName").value.trim()}` : "";
+  const msg = [st.title, $("#mMsg").value.trim()].filter(Boolean).join(" · ");
+  $("#mGo").disabled = true; $("#mGo").textContent = "Conectando con el pago…"; err("");
+  try {
+    const r = await fetch(`${SUPABASE_URL}/functions/v1/create-donation`, { method: "POST",
+      headers: { "Content-Type": "application/json", apikey: SUPABASE_KEY },
+      body: JSON.stringify({ provider, name, email, phone: $("#mPhone").value.trim(), area: $("#mArea").value,
+        amount_usd: per, months: n, anonymous: $("#mAnon").checked, dedication, message: msg }) });
+    const b = await r.json().catch(()=>({}));
+    if (!r.ok || !b.url) throw new Error(b.error || "No pudimos iniciar el pago.");
+    location.href = b.url;
+  } catch (e) {
+    err(e.message || "No pudimos iniciar el pago. Probá de nuevo.");
+    $("#mGo").disabled = false; upd();
+  }
+};
+
+/* ---------- vuelta desde Mercado Pago / PayPal ---------- */
+(function(){
+  const p = new URLSearchParams(location.search), s = p.get("donacion") || p.get("collection_status");
+  if (!s) return;
+  const msgs = {
+    ok: ["¡Gracias por tu donación!", "Tu pago fue recibido. En unos instantes vas a verlo reflejado en el contador, duplicado."],
+    approved: ["¡Gracias por tu donación!", "Tu pago fue recibido. En unos instantes vas a verlo reflejado en el contador, duplicado."],
+    pendiente: ["Tu pago está en proceso", "Cuando se acredite, tu donación aparecerá en la lista de donantes."],
+    pending: ["Tu pago está en proceso", "Cuando se acredite, tu donación aparecerá en la lista de donantes."],
+    cancelada: ["Pago cancelado", "No se realizó ningún cobro. Podés intentarlo de nuevo cuando quieras."],
+    error: ["No pudimos completar el pago", "No se realizó ningún cobro. Probá de nuevo o con otro medio de pago."],
+  };
+  const [t, x] = msgs[s] || msgs.error;
+  $("#rTitle").textContent = t; $("#rText").textContent = x;
+  $("#result").classList.add("on");
+  history.replaceState(null, "", location.pathname);
+  setTimeout(load, 4000);
+})();
+
+/* ---------- compartir ---------- */
+$("#contact").textContent = CONTACT;
+const url = location.origin + location.pathname, txt = "Sumate a Binián Atid: cada donación se duplica x2 — Comunidad Israelita de Santa Fe";
+$("#shWa").href = `https://wa.me/?text=${encodeURIComponent(txt+" "+url)}`;
+$("#shFb").href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+$("#shMail").href = `mailto:?subject=${encodeURIComponent("Binián Atid · x2")}&body=${encodeURIComponent(txt+"\n"+url)}`;
+$("#shCopy").onclick = () => navigator.clipboard?.writeText(url).then(()=>{ $("#shCopy").textContent="¡Copiado!"; setTimeout(()=>$("#shCopy").textContent="Copiar link",1500); });
+</script>
+</body>
+</html>
