@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Panel de donaciones · Binián Atid</title>
+<link rel="icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<style>
+  :root{--navy:#14284b;--navy-3:#0e1d38;--gold:#c9a24a;--bg:#f5f3ee;--card:#fff;--text:#1b2433;--muted:#6b7280;--line:#e6e1d6;--ok:#2f7d4f;--warn:#a16207;--err:#b42318}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Inter",system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px}
+  h1,h2{font-family:"Playfair Display",Georgia,serif;margin:0}
+  header{background:var(--navy-3);color:#fff}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:60px}
+  header img{height:36px;background:#fff;border-radius:6px;padding:3px 6px}
+  header .brand{display:flex;align-items:center;gap:10px;font-family:"Playfair Display",serif;font-size:17px}
+  .wrap{max-width:1300px;margin:0 auto;padding:0 16px}
+  .btn{border:0;border-radius:8px;padding:9px 14px;font:inherit;font-weight:600;cursor:pointer;background:var(--gold);color:var(--navy-3)}
+  .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)}
+  .btn:disabled{opacity:.6;cursor:wait}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
+  #login{max-width:420px;margin:60px auto}
+  #login p{color:var(--muted)}
+  input,select{font:inherit;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--text)}
+  #login input{width:100%;margin:8px 0 12px}
+  .msg{margin-top:12px;font-size:13px}
+  .msg.err{color:var(--err)} .msg.ok{color:var(--ok)}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:20px 0}
+  .kpi .l{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+  .kpi .v{font-size:24px;font-weight:700;margin-top:4px;font-variant-numeric:tabular-nums}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+  .filters input[type=search]{flex:1;min-width:200px}
+  .tablebox{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:12px}
+  table{border-collapse:collapse;width:100%;min-width:1100px}
+  th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{background:#faf8f3;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;position:sticky;top:0;cursor:pointer;white-space:nowrap}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr:hover td{background:#fcfbf8}
+  .pill{display:inline-block;padding:2px 8px;border-radius:99px;font-size:12px;font-weight:600}
+  .s-approved{background:#e7f4ec;color:var(--ok)} .s-pending{background:#fdf3d7;color:var(--warn)}
+  .s-cancelled,.s-refunded{background:#fde8e6;color:var(--err)}
+  .small{font-size:12px;color:var(--muted)}
+  .count{margin:10px 2px;color:var(--muted)}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="brand"><img src="img/logo.png" alt="">Panel de donaciones</div>
+  <div id="who" class="hidden"><span id="whoEmail" class="small" style="color:#cbd5e1;margin-right:10px"></span><button class="btn ghost" id="logout">Salir</button></div>
+</div></header>
+
+<main class="wrap">
+  <section id="login" class="card hidden">
+    <h2>Ingresar</h2>
+    <p>Escribí tu mail. Te llega un enlace para entrar (sin contraseña).</p>
+    <form id="loginForm">
+      <input type="email" id="email" required placeholder="tu@mail.com" autocomplete="email">
+      <button class="btn" id="sendBtn" type="submit">Enviarme el enlace</button>
+    </form>
+    <div id="loginMsg" class="msg"></div>
+  </section>
+
+  <section id="denied" class="card hidden" style="max-width:520px;margin:60px auto">
+    <h2>Sin acceso</h2>
+    <p>Este mail no está habilitado para ver las donaciones. Pedile a la dirección que lo agregue a la tabla <code>admins</code> en Supabase.</p>
+  </section>
+
+  <section id="panel" class="hidden">
+    <div class="kpis">
+      <div class="card kpi"><div class="l">Donaciones aprobadas</div><div class="v" id="kCount">–</div></div>
+      <div class="card kpi"><div class="l">Comprometido (USD)</div><div class="v" id="kGiven">–</div></div>
+      <div class="card kpi"><div class="l">Con duplicación</div><div class="v" id="kRaised">–</div></div>
+      <div class="card kpi"><div class="l">Meta duplicada</div><div class="v" id="kGoal">–</div></div>
+      <div class="card kpi"><div class="l">Pendientes</div><div class="v" id="kPending">–</div></div>
+    </div>
+
+    <div class="filters">
+      <input type="search" id="q" placeholder="Buscar nombre, mail, teléfono, mensaje…">
+      <select id="fStatus">
+        <option value="approved">Aprobadas</option>
+        <option value="pending">Pendientes</option>
+        <option value="cancelled">Canceladas / reintegradas</option>
+        <option value="">Todos los estados</option>
+      </select>
+      <select id="fProvider">
+        <option value="">Todos los medios</option>
+        <option value="mercadopago">Mercado Pago</option>
+        <option value="paypal">PayPal</option>
+        <option value="offline">Efectivo / transferencia</option>
+      </select>
+      <select id="fArea"><option value="">Todas las áreas</option></select>
+      <select id="fType">
+        <option value="">Único y mensual</option>
+        <option value="once">Pago único</option>
+        <option value="monthly">Mensual</option>
+      </select>
+      <button class="btn" id="reload" type="button">Actualizar</button>
+    </div>
+
+    <div class="count" id="count"></div>
+    <div class="tablebox">
+      <table>
+        <thead><tr>
+          <th data-k="date">Fecha</th><th data-k="name">Donante</th><th data-k="email">Contacto</th>
+          <th data-k="total_usd" class="num">Total USD</th><th data-k="amount_usd" class="num">Cuota</th>
+          <th data-k="months" class="num">Meses</th><th data-k="payments_received" class="num">Pagos</th>
+          <th data-k="amount_ars" class="num">ARS</th><th data-k="provider">Medio</th><th data-k="area">Área</th>
+          <th data-k="dedication">Dedicatoria / mensaje</th><th data-k="status">Estado</th>
+        </tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <p class="small" style="margin:14px 2px 40px">Datos personales de donantes: uso interno de CISF, no compartir.</p>
+  </section>
+</main>
+
+<script>
+const SUPABASE_URL = "https://mwgcihrwmezqhcnhmimc.supabase.co";
+const SUPABASE_KEY = "sb_publishable_P9TrYnD7lZDZDL7sdcTW4A_7x26vGdV";
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const $ = s => document.querySelector(s);
+const show = id => ["login","denied","panel"].forEach(x => $("#"+x).classList.toggle("hidden", x !== id));
+const usd = n => "US$ " + Number(n || 0).toLocaleString("es-AR", {maximumFractionDigits: 0});
+const ars = n => n ? "$ " + Number(n).toLocaleString("es-AR", {maximumFractionDigits: 0}) : "";
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+const PROV = {mercadopago: "Mercado Pago", paypal: "PayPal", offline: "Efectivo / transf."};
+const STAT = {approved: "Aprobada", pending: "Pendiente", cancelled: "Cancelada", refunded: "Reintegrada"};
+
+let all = [], settings = null, sortKey = "date", sortDir = -1;
+
+$("#loginForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const btn = $("#sendBtn"), msg = $("#loginMsg");
+  btn.disabled = true; msg.className = "msg"; msg.textContent = "";
+  const { error } = await sb.auth.signInWithOtp({
+    email: $("#email").value.trim(),
+    options: { emailRedirectTo: location.origin + location.pathname }
+  });
+  btn.disabled = false;
+  if (error) { msg.className = "msg err"; msg.textContent = "No se pudo enviar: " + error.message; }
+  else { msg.className = "msg ok"; msg.textContent = "Listo. Revisá tu mail y abrí el enlace desde este mismo navegador."; }
+});
+$("#logout").addEventListener("click", async () => { await sb.auth.signOut(); location.reload(); });
+
+async function start(session) {
+  if (!session) { $("#who").classList.add("hidden"); show("login"); return; }
+  $("#who").classList.remove("hidden"); $("#whoEmail").textContent = session.user.email;
+  const { data: ok } = await sb.rpc("is_admin");
+  if (!ok) { show("denied"); return; }
+  show("panel"); load();
+}
+
+async function load() {
+  $("#count").textContent = "Cargando…";
+  const [d, s] = await Promise.all([
+    sb.from("donations").select("*").order("created_at", { ascending: false }).limit(5000),
+    sb.from("campaign_settings").select("*").eq("id", 1).maybeSingle()
+  ]);
+  if (d.error) { $("#count").textContent = "Error: " + d.error.message; return; }
+  all = d.data.map(r => ({ ...r, date: r.approved_at || r.created_at }));
+  settings = s.data;
+  const areas = [...new Set(all.map(r => r.area || "general"))].sort();
+  const cur = $("#fArea").value;
+  $("#fArea").innerHTML = '<option value="">Todas las áreas</option>' + areas.map(a => `<option>${esc(a)}</option>`).join("");
+  $("#fArea").value = cur;
+  kpis(); render();
+}
+
+function kpis() {
+  const ok = all.filter(r => r.status === "approved");
+  const given = ok.reduce((t, r) => t + Number(r.total_usd || 0), 0);
+  const mult = Number(settings?.match_multiplier || 2);
+  $("#kCount").textContent = ok.length;
+  $("#kGiven").textContent = usd(given);
+  $("#kRaised").textContent = usd(given * mult);
+  $("#kGoal").textContent = settings ? usd(settings.goal_usd * mult) : "–";
+  $("#kPending").textContent = all.filter(r => r.status === "pending").length;
+}
+
+function filtered() {
+  const q = $("#q").value.trim().toLowerCase(), st = $("#fStatus").value, pv = $("#fProvider").value,
+        ar = $("#fArea").value, ty = $("#fType").value;
+  return all.filter(r =>
+    (!st || (st === "cancelled" ? ["cancelled","refunded"].includes(r.status) : r.status === st)) &&
+    (!pv || r.provider === pv) &&
+    (!ar || (r.area || "general") === ar) &&
+    (!ty || (ty === "once" ? r.months === 1 : r.months > 1)) &&
+    (!q || [r.name, r.email, r.phone, r.message, r.dedication, r.provider_ref].join(" ").toLowerCase().includes(q))
+  ).sort((a, b) => {
+    const x = a[sortKey] ?? "", y = b[sortKey] ?? "";
+    return (typeof x === "number" || !isNaN(x) && x !== "" ? Number(x) - Number(y) : String(x).localeCompare(String(y))) * sortDir;
+  });
+}
+
+function render() {
+  const rows = filtered();
+  const tot = rows.reduce((t, r) => t + Number(r.total_usd || 0), 0);
+  $("#count").textContent = `${rows.length} donación${rows.length === 1 ? "" : "es"} · ${usd(tot)} comprometidos`;
+  $("#rows").innerHTML = rows.map(r => `<tr>
+    <td>${new Date(r.date).toLocaleString("es-AR", {dateStyle: "short", timeStyle: "short"})}</td>
+    <td><strong>${esc(r.name)}</strong>${r.anonymous ? '<div class="small">Pidió ser anónimo</div>' : ""}</td>
+    <td>${r.email ? `<a href="mailto:${esc(r.email)}">${esc(r.email)}</a>` : ""}${r.phone ? `<div class="small">${esc(r.phone)}</div>` : ""}</td>
+    <td class="num"><strong>${usd(r.total_usd)}</strong></td>
+    <td class="num">${usd(r.amount_usd)}</td>
+    <td class="num">${r.months}</td>
+    <td class="num">${r.months > 1 ? `${r.payments_received}/${r.months}` : ""}</td>
+    <td class="num">${ars(r.amount_ars)}</td>
+    <td>${PROV[r.provider] || esc(r.provider)}${r.provider_ref ? `<div class="small">${esc(r.provider_ref)}</div>` : ""}</td>
+    <td>${esc(r.area || "general")}</td>
+    <td>${r.dedication ? `<div>${esc(r.dedication)}</div>` : ""}${r.message ? `<div class="small">“${esc(r.message)}”</div>` : ""}</td>
+    <td><span class="pill s-${esc(r.status)}">${STAT[r.status] || esc(r.status)}</span></td>
+  </tr>`).join("") || '<tr><td colspan="12" class="small" style="padding:24px;text-align:center">No hay donaciones con estos filtros.</td></tr>';
+}
+
+["#q","#fStatus","#fProvider","#fArea","#fType"].forEach(s => $(s).addEventListener("input", render));
+$("#reload").addEventListener("click", load);
+document.querySelectorAll("th[data-k]").forEach(th => th.addEventListener("click", () => {
+  const k = th.dataset.k; sortDir = sortKey === k ? -sortDir : (k === "name" ? 1 : -1); sortKey = k; render();
+}));
+
+sb.auth.onAuthStateChange((ev, session) => { if (ev === "SIGNED_IN" || ev === "SIGNED_OUT") start(session); });
+sb.auth.getSession().then(({ data }) => start(data.session));
+</script>
+</body>
+</html>
